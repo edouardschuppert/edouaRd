@@ -29,4 +29,17 @@ povertext(your_string)
 
 ```
 
+# datetimes_fr
+
+`datetimes_fr` turn your dates into a french format. Please note that this is NOT a useful format to work with R. This function can only be used with a purpose of report, in order to have a very understandable format.
+
+```{r}
+require(edouaRd, quietly = TRUE)
+
+your_datetime <- lubridate::as_datetime(Sys.time())
+
+datetimes_fr(your_datetime)
+
+```
+
 Please report issues and suggestions to the [issues tracker](https://github.com/edouardschuppert/edouaRd/issues).

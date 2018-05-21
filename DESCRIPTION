@@ -1,8 +1,11 @@
 Package: edouaRd
 Type: Package
 Title: A bench of some tricks I often use
-Version: 0.1.0
+Version: 0.1.1
 Imports:
+    dplyr,
+    lubridate,
+    magrittr,
     stringr
 Authors@R: person("Edouard", "Schuppert", email = "edouard.schuppert@gmail.com",
   role = c("aut", "cre"))
