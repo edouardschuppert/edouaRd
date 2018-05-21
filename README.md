@@ -20,7 +20,7 @@ require(edouaRd, quietly = TRUE)
 
 your_string <- c("Père Noël", "Où êtes-vous ?")
 
-print(povertext(your_string))
+povertext(your_string)
 ```
 
     ## [1] "pere noel"      "ou etes-vous ?"

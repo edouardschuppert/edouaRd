@@ -16,4 +16,6 @@ povertext <- function(val){
   val <- stringr::str_replace_all(val, "(?:î|ï)", "i")
   val <- stringr::str_replace_all(val, "(?:ö|ô)", "o")
 
+  val
+
 }

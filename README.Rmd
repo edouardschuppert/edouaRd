@@ -25,9 +25,8 @@ require(edouaRd, quietly = TRUE)
 
 your_string <- c("Père Noël", "Où êtes-vous ?")
 
-print(povertext(your_string))
+povertext(your_string)
 
 ```
-
 
 Please report issues and suggestions to the [issues tracker](https://github.com/edouardschuppert/edouaRd/issues).
