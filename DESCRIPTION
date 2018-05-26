@@ -1,7 +1,7 @@
 Package: edouaRd
 Type: Package
 Title: A bench of some tricks I often use
-Version: 0.1.1
+Version: 0.1.2
 Imports:
     dplyr,
     lubridate,
