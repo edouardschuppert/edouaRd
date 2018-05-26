@@ -36,9 +36,9 @@ povertext(your_string)
 ```{r}
 require(edouaRd, quietly = TRUE)
 
-your_datetime <- lubridate::as_datetime(Sys.time())
+Sys.time()
 
-datetimes_fr(your_datetime)
+datetimes_fr(Sys.time())
 
 ```
 

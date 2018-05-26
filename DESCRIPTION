@@ -6,7 +6,10 @@ Imports:
     dplyr,
     lubridate,
     magrittr,
-    stringr
+    plyr,
+    readr,
+    stringr,
+    tidytext
 Authors@R: person("Edouard", "Schuppert", email = "edouard.schuppert@gmail.com",
   role = c("aut", "cre"))
 Description: Too complicated
