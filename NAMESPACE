@@ -3,4 +3,5 @@
 export(choose_period)
 export(datetimes_fr)
 export(povertext)
+export(wordfrequency)
 importFrom(magrittr,"%>%")
