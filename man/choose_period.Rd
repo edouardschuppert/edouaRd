@@ -21,7 +21,7 @@ choose_period(df, colonne, startday, endday, starttime = "00:00:00",
 \item{andtime}{The end time of the period you want to select. Default set to 23:59:59}
 }
 \value{
-Return a text, without any accent or links
+Return the observations between the two specified dates
 }
 \description{
 Time Filter function

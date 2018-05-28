@@ -8,7 +8,7 @@
 #' @param endday The last day of the period you want to select
 #' @param starttime The start time of the period you want to select. Default set to 00:00:00
 #' @param andtime The end time of the period you want to select. Default set to 23:59:59
-#' @return Return a text, without any accent or links
+#' @return Return the observations between the two specified dates
 #' @export
 
 choose_period <- function(df, colonne, startday, endday, starttime = "00:00:00", endtime = "23:59:59"){
