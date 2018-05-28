@@ -8,6 +8,7 @@ Imports:
     magrittr,
     plyr,
     readr,
+    rlang,
     stringr,
     tidytext
 Authors@R: person("Edouard", "Schuppert", email = "edouard.schuppert@gmail.com",
