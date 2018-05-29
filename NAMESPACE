@@ -3,6 +3,7 @@
 export(choose_period)
 export(datetimes_fr)
 export(distribution_time)
+export(hashtagfrequency)
 export(povertext)
 export(wordfrequency)
 importFrom(magrittr,"%>%")

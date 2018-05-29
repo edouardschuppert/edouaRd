@@ -8,6 +8,7 @@ Imports:
     magrittr,
     plyr,
     readr,
+    rex,
     rlang,
     stringr,
     tidytext
