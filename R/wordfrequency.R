@@ -11,7 +11,7 @@ wordfrequency <- function(df, colonne) {
 
   wf_dictionary <- edouaRd::wf_dictionary
 
-  wf <- df %>%
+  df %>%
     dplyr::select(!!colonne) %>%
     dplyr::mutate(colonne = povertext(!!colonne)) %>%
     tidytext::unnest_tokens(words, colonne) %>%
