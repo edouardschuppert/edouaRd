@@ -24,4 +24,4 @@ choose_period <- function(df, colonne, startday, endday, starttime = "00:00:00",
 
 }
 
-# Ajouter choose_periode pour l'importation (selection SQL)
+# Ajouter un arrange sur la colonne
