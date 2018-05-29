@@ -10,6 +10,8 @@ wordfrequency(df, colonne)
 \item{df}{Your data frame}
 
 \item{colonne}{Your column}
+
+\item{shortlist}{Slice the word frequency. Default set to no slice}
 }
 \value{
 Return the word frequency of the column you chose

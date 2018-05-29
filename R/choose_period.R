@@ -23,3 +23,5 @@ choose_period <- function(df, colonne, startday, endday, starttime = "00:00:00",
            !!colonne < endtimestamp)
 
 }
+
+# Ajouter choose_periode pour l'importation (selection SQL)
