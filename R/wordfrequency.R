@@ -2,7 +2,6 @@
 #'
 #' @param df Your data frame
 #' @param colonne Your column
-#' @param shortlist Slice the word frequency. Default set to no slice
 #' @return Return the word frequency of the column you chose
 #' @export
 
@@ -21,8 +20,6 @@ wordfrequency <- function(df, colonne) {
     dplyr::anti_join(wf_dictionary, by = "words") %>%
     dplyr::count(words) %>%
     dplyr::arrange(desc(n))
-
-    print(shortlist)
 
 }
 
