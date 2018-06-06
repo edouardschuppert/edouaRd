@@ -18,7 +18,7 @@ choose_period(df, colonne, startday, endday, starttime = "00:00:00",
 
 \item{starttime}{The start time of the period you want to select. Default set to 00:00:00}
 
-\item{andtime}{The end time of the period you want to select. Default set to 23:59:59}
+\item{endtime}{The end time of the period you want to select. Default set to 23:59:59}
 }
 \value{
 Return the observations between the two specified dates

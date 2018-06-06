@@ -7,7 +7,7 @@
 #' @param startday The first day of the period you want to select
 #' @param endday The last day of the period you want to select
 #' @param starttime The start time of the period you want to select. Default set to 00:00:00
-#' @param andtime The end time of the period you want to select. Default set to 23:59:59
+#' @param endtime The end time of the period you want to select. Default set to 23:59:59
 #' @return Return the observations between the two specified dates
 #' @export
 
