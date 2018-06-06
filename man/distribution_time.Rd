@@ -4,16 +4,18 @@
 \alias{distribution_time}
 \title{distribution_time}
 \usage{
-distribution_time(df, colonne)
+distribution_time(df, colonne, draw = FALSE)
 }
 \arguments{
 \item{df}{Your data frame}
 
 \item{colonne}{Your column}
+
+\item{draw}{Ability to return a ggplot2 schema to view the distribution. Default set to FALSE}
 }
 \value{
-Return a data frame with the distribution
+Returns a distribution table
 }
 \description{
-Check the time distribution of a data frame
+Check the temporal distribution of a table.
 }

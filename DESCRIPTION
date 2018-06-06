@@ -1,9 +1,10 @@
 Package: edouaRd
 Type: Package
-Title: A bench of some tricks I often use
+Title: edouaRd
 Version: 0.1.2
 Imports:
     dplyr,
+    ggplot2,
     lubridate,
     magrittr,
     plyr,
@@ -14,7 +15,7 @@ Imports:
     tidytext
 Authors@R: person("Edouard", "Schuppert", email = "edouard.schuppert@gmail.com",
   role = c("aut", "cre"))
-Description: Too complicated
+Description: The package is a set of functions that I use every day..
 Depends: R (>= 3.4.0)
 License: CC0
 Encoding: UTF-8
