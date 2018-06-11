@@ -23,7 +23,8 @@ hashtagfrequency <- function(df, colonne, slice = NA) {
     dplyr::count(words) %>%
     dplyr::arrange(desc(n)) %>%
     dplyr::mutate(hashtags = paste0("#", words)) %>%
-    dplyr::select(hashtags, n)
+    dplyr::select(hashtags, n) %>%
+    filter(stringr::str_detect(hashtags, paste(c("^#character$", "^#0$"), collapse = "|")) == FALSE)
 
   # Keep only the desired length
   if (is.na(slice) == FALSE) {
