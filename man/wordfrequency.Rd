@@ -4,12 +4,14 @@
 \alias{wordfrequency}
 \title{wordfrenquency}
 \usage{
-wordfrequency(df, colonne)
+wordfrequency(df, colonne, slice = NA)
 }
 \arguments{
 \item{df}{Your data frame}
 
 \item{colonne}{Your column}
+
+\item{slice}{Allows you to keep only a small number of observations, starting from the first. Default set to NA}
 }
 \value{
 Return the word frequency of the column you chose

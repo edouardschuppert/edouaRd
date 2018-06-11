@@ -2,16 +2,19 @@
 #'
 #' @param df Your data frame
 #' @param colonne Your column
+#' @param slice Allows you to keep only a small number of observations, starting from the first. Default set to NA
 #' @return Return the word frequency of the column you chose
 #' @export
 
-wordfrequency <- function(df, colonne) {
+wordfrequency <- function(df, colonne, slice = NA) {
 
   colonne <- rlang::enquo(colonne)
 
+  # Loading wordfrequency dictionary
   wf_dictionary <- edouaRd::wf_dictionary
 
-  df %>%
+  # Processing
+  df <- df %>%
     dplyr::select(!!colonne) %>%
     dplyr::mutate(colonne = povertext(!!colonne)) %>%
     tidytext::unnest_tokens(words, colonne) %>%
@@ -21,6 +24,14 @@ wordfrequency <- function(df, colonne) {
     dplyr::count(words) %>%
     dplyr::arrange(desc(n))
 
-}
+  # Keep only the desired length
+  if (is.na(slice) == FALSE) {
 
-# Ajouter slice dans la fonction
+    df <- df %>%
+      dplyr::slice(1:slice)
+
+  }
+
+  df
+
+}
