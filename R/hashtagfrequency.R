@@ -2,14 +2,16 @@
 #'
 #' @param df Your data frame
 #' @param colonne Your column
+#' @param slice Allows you to keep only a small number of observations, starting from the first. Default set to NA
 #' @return Return the hashtag frequency of the column you chose
 #' @export
 
-hashtagfrequency <- function(df, colonne) {
+hashtagfrequency <- function(df, colonne, slice = NA) {
 
   colonne <- rlang::enquo(colonne)
 
-  df %>%
+  # Processing
+  df <- df %>%
     dplyr::select(!!colonne) %>%
     dplyr::mutate(colonne = povertext(!!colonne)) %>%
     dplyr::mutate(hash = as.character(stringr::str_extract_all(colonne, "(?:(?:^|[[:space:]]+)|(?:[[:punct:]])?)#(?:[^[:blank:]]*|[^[:space:]]*)(?:(?:(?:[[:punct:]])?|[[:space:]])|$)"))) %>%
@@ -23,6 +25,20 @@ hashtagfrequency <- function(df, colonne) {
     dplyr::mutate(hashtags = paste0("#", words)) %>%
     dplyr::select(hashtags, n)
 
+  # Keep only the desired length
+  if (is.na(slice) == FALSE) {
+
+    df <- df %>%
+      dplyr::slice(1:slice)
+
+  }
+
+  df
+
 }
 
-# Ajouter slice dans la fonction
+# Récupérer bon hashtags avec la casse par système de tableau comparatif
+# Ejecter hashtags déchets
+
+# temp <- edouaRd::rstats %>%
+#   hashtagfrequency(text, slice = NA)
