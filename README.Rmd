@@ -21,25 +21,69 @@ devtools::install_github("edouardschuppert/edouaRd")
 `povertext` deplete your text, it deletes any accents or umlaut.
 
 ```{r}
-require(edouaRd, quietly = TRUE)
+library(edouaRd, quietly = TRUE)
 
-your_string <- c("Père Noël", "Où êtes-vous ?")
-
-povertext(your_string)
+povertext(c("Père Noël", "Où êtes-vous ?"))
 
 ```
 
-# datetimes_fr
+# datetimes_fr & dates_fr
 
-`datetimes_fr` turn your dates into a french format. Please note that this is NOT a useful format to work with R. This function can only be used with a purpose of report, in order to have a very understandable format.
+`datetimes_fr` turn your datetimes into a french format. `dates_fr` does the same thing, with only the dates. Please note that this is NOT a useful format to work with R. This function can only be used with a purpose of report, in order to have a very understandable format.
 
 ```{r}
-require(edouaRd, quietly = TRUE)
-
 Sys.time()
 
 datetimes_fr(Sys.time())
 
+dates_fr(Sys.time())
+
+```
+
+# wordfrequency & hashtagfrequency
+
+`wordfrequency` splits character strings into words and classifies them, so you know which ones are the most used. `hashtagfrequency` does the same thing, but with the hashtags. The possibility is offered to keep only part of this data.
+
+```{r}
+library(tidyverse, quietly = TRUE)
+
+edouaRd::rstats %>% 
+  wordfrequency(text)
+
+edouaRd::rstats %>% 
+  hashtagfrequency(text, slice = 50)
+```
+
+# distribution_time
+
+`distribution_time` is used to check the temporal distribution of a dataset.
+
+```{r}
+edouaRd::rstats %>% 
+  distribution_time(created_at)
+```
+
+With the `draw` argument, this distribution can be expressed more visually.
+
+```{r}
+edouaRd::rstats %>% 
+  distribution_time(created_at, draw = TRUE)
+```
+
+# choose_period
+
+`choose_period` allows to filter a corpus by an entry date and an exit date.
+
+```{r}
+edouaRd::rstats %>% 
+  choose_period(created_at, "2018-05-22", "2018-05-27")
+```
+
+It is possible, as arguments, to also add a filter by hours, and to sort from oldest to newest.
+
+```{r}
+edouaRd::rstats %>% 
+  choose_period(created_at, "2018-05-22", "2018-05-27", starttime = "16:00:00", endtime = "12:00:00", sort = TRUE)
 ```
 
 Please report issues and suggestions to the [issues tracker](https://github.com/edouardschuppert/edouaRd/issues).

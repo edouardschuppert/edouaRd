@@ -15,7 +15,7 @@ Imports:
     tidytext
 Authors@R: person("Edouard", "Schuppert", email = "edouard.schuppert@gmail.com",
   role = c("aut", "cre"))
-Description: The package is a set of functions that I use every day..
+Description: The package is a set of functions that I use every day.
 Depends: R (>= 3.4.0)
 License: CC0
 Encoding: UTF-8

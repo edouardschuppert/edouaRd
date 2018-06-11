@@ -1,9 +1,9 @@
 edouaRd
 ================
 
-This is a package of practical things I use every day. Thus, it is not really community oriented.
+Ceci est un package de trucs pratiques que j'utilise au quotidien. C'est pourquoi il n'est pas très orienté communauté.
 
-`edouaRd` can be installed from Github :
+`edouaRd` peut être installé depuis GitHub :
 
 ``` r
 # install.packages("devtools")
@@ -13,7 +13,7 @@ devtools::install_github("edouardschuppert/edouaRd")
 povertext
 =========
 
-`povertext` deplete your text, it deletes any accents or umlaut.
+`povertext` permet d'appauvrir le texte, en supprimant tous les accents et trémas.
 
 ``` r
 library(edouaRd, quietly = TRUE)
@@ -26,19 +26,19 @@ povertext(c("Père Noël", "Où êtes-vous ?"))
 datetimes\_fr & dates\_fr
 =========================
 
-`datetimes_fr` turn your datetimes into a french format. `dates_fr` does the same thing, with only the dates. Please note that this is NOT a useful format to work with R. This function can only be used with a purpose of report, in order to have a very understandable format.
+`datetimes_fr` transforme les dates et heures en un format français. `dates_fr` fait la même chose mais uniquement avec les dates. Il faut noter que ceci n'est PAS un format utile pour travailler avec R. Cette fonction ne peut être utilisée que dans un but de rapport ou de présentation, afin d'obtenir un format très compréhensible.
 
 ``` r
 Sys.time()
 ```
 
-    ## [1] "2018-06-11 12:07:41 CEST"
+    ## [1] "2018-06-11 12:07:28 CEST"
 
 ``` r
 datetimes_fr(Sys.time())
 ```
 
-    ## [1] "11/06/2018 10:07:41"
+    ## [1] "11/06/2018 10:07:28"
 
 ``` r
 dates_fr(Sys.time())
@@ -49,7 +49,7 @@ dates_fr(Sys.time())
 wordfrequency & hashtagfrequency
 ================================
 
-`wordfrequency` splits character strings into words and classifies them, so you know which ones are the most used. `hashtagfrequency` does the same thing, but with the hashtags. The possibility is offered to keep only part of this data.
+`wordfrequency` découpe les phrases en mots et les classe, permettant ainsi de savoir lesquels sont les plus utilisés. `hashtagfrequency` fait la même chose, mais avec les hashtags. La possibilité est offerte de ne garder qu'une partie de ces données.
 
 ``` r
 library(tidyverse, quietly = TRUE)
@@ -109,7 +109,7 @@ edouaRd::rstats %>%
 distribution\_time
 ==================
 
-`distribution_time` is used to check the temporal distribution of a dataset.
+`distribution_time` permet de vérifier la distribution temporelle d'un jeu de données.
 
 ``` r
 edouaRd::rstats %>% 
@@ -131,19 +131,19 @@ edouaRd::rstats %>%
     ## 10 2018-05-28  1532
     ## 11 2018-05-29   807
 
-With the `draw` argument, this distribution can be expressed more visually.
+Avec l'argument draw, cette distribution peut être exprimée de manière plus visuelle.
 
 ``` r
 edouaRd::rstats %>% 
   distribution_time(created_at, draw = TRUE)
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![](README_fr_files/figure-markdown_github/unnamed-chunk-6-1.png)
 
 choose\_period
 ==============
 
-`choose_period` allows to filter a corpus by an entry date and an exit date.
+`choose_period` permet de filrter un corpus par une date d'entrée et une date de sortie.
 
 ``` r
 edouaRd::rstats %>% 
@@ -178,7 +178,7 @@ edouaRd::rstats %>%
     ## #   from_user_listed <int>, from_user_withheld_scope <chr>,
     ## #   from_user_created_at <dttm>
 
-It is possible, as arguments, to also add a filter by hours, and to sort from oldest to newest.
+Il est possible, comme arguments, d'ajouter également un filtre par heures, et d'opérer un tri du plus ancien au plus récent.
 
 ``` r
 edouaRd::rstats %>% 
@@ -213,4 +213,4 @@ edouaRd::rstats %>%
     ## #   from_user_listed <int>, from_user_withheld_scope <chr>,
     ## #   from_user_created_at <dttm>
 
-Please report issues and suggestions to the [issues tracker](https://github.com/edouardschuppert/edouaRd/issues).
+Pour toute question ou suggestion, merci de consulter la section [issues tracker](https://github.com/edouardschuppert/edouaRd/issues).

@@ -1,0 +1,89 @@
+---
+title: "edouaRd"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Ceci est un package de trucs pratiques que j'utilise au quotidien. C'est pourquoi il n'est pas très orienté communauté.
+
+`edouaRd` peut être installé depuis GitHub :
+
+```{r eval=FALSE}
+# install.packages("devtools")
+devtools::install_github("edouardschuppert/edouaRd")
+```
+
+# povertext
+
+`povertext` permet d'appauvrir le texte, en supprimant tous les accents et trémas.
+
+```{r}
+library(edouaRd, quietly = TRUE)
+
+povertext(c("Père Noël", "Où êtes-vous ?"))
+
+```
+
+# datetimes_fr & dates_fr
+
+`datetimes_fr` transforme les dates et heures en un format français. `dates_fr` fait la même chose mais uniquement avec les dates. Il faut noter que ceci n'est PAS un format utile pour travailler avec R. Cette fonction ne peut être utilisée que dans un but de rapport ou de présentation, afin d'obtenir un format très compréhensible.
+
+```{r}
+Sys.time()
+
+datetimes_fr(Sys.time())
+
+dates_fr(Sys.time())
+
+```
+
+# wordfrequency & hashtagfrequency
+
+`wordfrequency` découpe les phrases en mots et les classe, permettant ainsi de savoir lesquels sont les plus utilisés. `hashtagfrequency` fait la même chose, mais avec les hashtags. La possibilité est offerte de ne garder qu'une partie de ces données.
+
+```{r}
+library(tidyverse, quietly = TRUE)
+
+edouaRd::rstats %>% 
+  wordfrequency(text)
+
+edouaRd::rstats %>% 
+  hashtagfrequency(text, slice = 50)
+```
+
+# distribution_time
+
+`distribution_time` permet de vérifier la distribution temporelle d'un jeu de données.
+
+```{r}
+edouaRd::rstats %>% 
+  distribution_time(created_at)
+```
+
+Avec l'argument draw, cette distribution peut être exprimée de manière plus visuelle.
+
+```{r}
+edouaRd::rstats %>% 
+  distribution_time(created_at, draw = TRUE)
+```
+
+# choose_period
+
+`choose_period` permet de filrter un corpus par une date d'entrée et une date de sortie. 
+
+```{r}
+edouaRd::rstats %>% 
+  choose_period(created_at, "2018-05-22", "2018-05-27")
+```
+
+Il est possible, comme arguments, d'ajouter également un filtre par heures, et d'opérer un tri du plus ancien au plus récent.
+
+```{r}
+edouaRd::rstats %>% 
+  choose_period(created_at, "2018-05-22", "2018-05-27", starttime = "16:00:00", endtime = "12:00:00", sort = TRUE)
+```
+
+Pour toute question ou suggestion, merci de consulter la section [issues tracker](https://github.com/edouardschuppert/edouaRd/issues).
