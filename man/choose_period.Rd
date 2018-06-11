@@ -5,7 +5,7 @@
 \title{choose_period}
 \usage{
 choose_period(df, colonne, startday, endday, starttime = "00:00:00",
-  endtime = "23:59:59")
+  endtime = "23:59:59", sort = FALSE)
 }
 \arguments{
 \item{df}{Your data frame}
@@ -19,6 +19,8 @@ choose_period(df, colonne, startday, endday, starttime = "00:00:00",
 \item{starttime}{The start time of the period you want to select. Default set to 00:00:00}
 
 \item{endtime}{The end time of the period you want to select. Default set to 23:59:59}
+
+\item{sort}{Gives the possibility to arrange the table, in ascending order}
 }
 \value{
 Return the observations between the two specified dates
