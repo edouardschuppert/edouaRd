@@ -7,10 +7,10 @@
 datetimes_fr(datum = Sys.time())
 }
 \arguments{
-\item{datum}{Your date. DEFAULT set to Sys.time()}
+\item{datum}{Your datetime. DEFAULT set to Sys.time()}
 }
 \value{
-Turn your date into a french format
+Turn your datetime into a french format
 }
 \description{
 datetimes_fr
