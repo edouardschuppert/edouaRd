@@ -34,5 +34,4 @@ distribution_time <- function(df, colonne, draw = FALSE){
 
 }
 
-# Ajouter possibilité de plot
 # Ajouter choix de la granularité
