@@ -39,7 +39,3 @@ hashtagfrequency <- function(df, colonne, slice = NA) {
 }
 
 # Récupérer bon hashtags avec la casse par système de tableau comparatif
-# Ejecter hashtags déchets
-
-# temp <- edouaRd::rstats %>%
-#   hashtagfrequency(text)
