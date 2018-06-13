@@ -32,24 +32,24 @@ datetimes\_fr & dates\_fr
 Sys.time()
 ```
 
-    ## [1] "2018-06-11 12:07:28 CEST"
+    ## [1] "2018-06-13 18:06:43 CEST"
 
 ``` r
 datetimes_fr(Sys.time())
 ```
 
-    ## [1] "11/06/2018 10:07:28"
+    ## [1] "13/06/2018 16:06:43"
 
 ``` r
 dates_fr(Sys.time())
 ```
 
-    ## [1] "11/06/2018"
+    ## [1] "13/06/2018"
 
-wordfrequency & hashtagfrequency
-================================
+wordfrequency, bigramfrequency & hashtagfrequency
+=================================================
 
-`wordfrequency` découpe les phrases en mots et les classe, permettant ainsi de savoir lesquels sont les plus utilisés. `hashtagfrequency` fait la même chose, mais avec les hashtags. La possibilité est offerte de ne garder qu'une partie de ces données.
+`wordfrequency` découpe les phrases en mots et les classe, permettant ainsi de savoir lesquels sont les plus utilisés. `bigramfrequency` fait la même chose, mais avec des bigrams. `hashtagfrequency` fait la même chose, mais avec les hashtags. La possibilité est offerte de ne garder qu'une partie de ces données.
 
 ``` r
 library(tidyverse, quietly = TRUE)
@@ -106,6 +106,26 @@ edouaRd::rstats %>%
     ## 10 #javascript       1092
     ## # ... with 40 more rows
 
+``` r
+edouaRd::rstats %>% 
+  bigramfrequency(text, slice = 50)
+```
+
+    ## # A tibble: 50 x 2
+    ##    bigram                          n
+    ##    <chr>                       <int>
+    ##  1 python rstats                1290
+    ##  2 datascience ai               1117
+    ##  3 machinelearning datascience  1089
+    ##  4 bigdata machinelearning      1045
+    ##  5 rstats datascience           1035
+    ##  6 bigdata datascience           782
+    ##  7 cloudcomputing serverless     697
+    ##  8 abdsc bigdata                 537
+    ##  9 java javascript               506
+    ## 10 cloud cloudcomputing          475
+    ## # ... with 40 more rows
+
 distribution\_time
 ==================
 
@@ -143,7 +163,7 @@ edouaRd::rstats %>%
 choose\_period
 ==============
 
-`choose_period` permet de filrter un corpus par une date d'entrée et une date de sortie.
+`choose_period` permet de filtrer un corpus par une date d'entrée et une date de sortie.
 
 ``` r
 edouaRd::rstats %>% 

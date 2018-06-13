@@ -40,9 +40,9 @@ dates_fr(Sys.time())
 
 ```
 
-# wordfrequency & hashtagfrequency
+# wordfrequency, bigramfrequency & hashtagfrequency
 
-`wordfrequency` splits character strings into words and classifies them, so you know which ones are the most used. `hashtagfrequency` does the same thing, but with the hashtags. The possibility is offered to keep only part of this data.
+`wordfrequency` splits character strings into words and classifies them, so you know which ones are the most used. `bigramfrequency` does the same thing, but with bigrams. `hashtagfrequency` does the same thing, but with the hashtags. The possibility is offered to keep only part of this data.
 
 ```{r}
 library(tidyverse, quietly = TRUE)
@@ -52,6 +52,9 @@ edouaRd::rstats %>%
 
 edouaRd::rstats %>% 
   hashtagfrequency(text, slice = 50)
+
+edouaRd::rstats %>% 
+  bigramfrequency(text, slice = 50)
 ```
 
 # distribution_time

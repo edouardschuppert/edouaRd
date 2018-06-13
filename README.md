@@ -32,24 +32,24 @@ datetimes\_fr & dates\_fr
 Sys.time()
 ```
 
-    ## [1] "2018-06-11 12:07:41 CEST"
+    ## [1] "2018-06-13 18:07:09 CEST"
 
 ``` r
 datetimes_fr(Sys.time())
 ```
 
-    ## [1] "11/06/2018 10:07:41"
+    ## [1] "13/06/2018 16:07:09"
 
 ``` r
 dates_fr(Sys.time())
 ```
 
-    ## [1] "11/06/2018"
+    ## [1] "13/06/2018"
 
-wordfrequency & hashtagfrequency
-================================
+wordfrequency, bigramfrequency & hashtagfrequency
+=================================================
 
-`wordfrequency` splits character strings into words and classifies them, so you know which ones are the most used. `hashtagfrequency` does the same thing, but with the hashtags. The possibility is offered to keep only part of this data.
+`wordfrequency` splits character strings into words and classifies them, so you know which ones are the most used. `bigramfrequency` does the same thing, but with bigrams. `hashtagfrequency` does the same thing, but with the hashtags. The possibility is offered to keep only part of this data.
 
 ``` r
 library(tidyverse, quietly = TRUE)
@@ -104,6 +104,26 @@ edouaRd::rstats %>%
     ##  8 #dataviz          1194
     ##  9 #golang           1124
     ## 10 #javascript       1092
+    ## # ... with 40 more rows
+
+``` r
+edouaRd::rstats %>% 
+  bigramfrequency(text, slice = 50)
+```
+
+    ## # A tibble: 50 x 2
+    ##    bigram                          n
+    ##    <chr>                       <int>
+    ##  1 python rstats                1290
+    ##  2 datascience ai               1117
+    ##  3 machinelearning datascience  1089
+    ##  4 bigdata machinelearning      1045
+    ##  5 rstats datascience           1035
+    ##  6 bigdata datascience           782
+    ##  7 cloudcomputing serverless     697
+    ##  8 abdsc bigdata                 537
+    ##  9 java javascript               506
+    ## 10 cloud cloudcomputing          475
     ## # ... with 40 more rows
 
 distribution\_time

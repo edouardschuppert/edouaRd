@@ -40,9 +40,9 @@ dates_fr(Sys.time())
 
 ```
 
-# wordfrequency & hashtagfrequency
+# wordfrequency, bigramfrequency & hashtagfrequency
 
-`wordfrequency` découpe les phrases en mots et les classe, permettant ainsi de savoir lesquels sont les plus utilisés. `hashtagfrequency` fait la même chose, mais avec les hashtags. La possibilité est offerte de ne garder qu'une partie de ces données.
+`wordfrequency` découpe les phrases en mots et les classe, permettant ainsi de savoir lesquels sont les plus utilisés. `bigramfrequency` fait la même chose, mais avec des bigrams. `hashtagfrequency` fait la même chose, mais avec les hashtags. La possibilité est offerte de ne garder qu'une partie de ces données.
 
 ```{r}
 library(tidyverse, quietly = TRUE)
@@ -52,6 +52,9 @@ edouaRd::rstats %>%
 
 edouaRd::rstats %>% 
   hashtagfrequency(text, slice = 50)
+
+edouaRd::rstats %>% 
+  bigramfrequency(text, slice = 50)
 ```
 
 # distribution_time
@@ -72,7 +75,7 @@ edouaRd::rstats %>%
 
 # choose_period
 
-`choose_period` permet de filrter un corpus par une date d'entrée et une date de sortie. 
+`choose_period` permet de filtrer un corpus par une date d'entrée et une date de sortie. 
 
 ```{r}
 edouaRd::rstats %>% 

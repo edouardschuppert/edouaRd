@@ -1,7 +1,7 @@
 Package: edouaRd
 Type: Package
 Title: edouaRd
-Version: 0.1.2
+Version: 0.1.3
 Imports:
     dplyr,
     ggplot2,
@@ -12,6 +12,7 @@ Imports:
     rex,
     rlang,
     stringr,
+    tidyr,
     tidytext
 Authors@R: person("Edouard", "Schuppert", email = "edouard.schuppert@gmail.com",
   role = c("aut", "cre"))
