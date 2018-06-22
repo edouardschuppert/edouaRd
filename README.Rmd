@@ -27,19 +27,6 @@ povertext(c("Père Noël", "Où êtes-vous ?"))
 
 ```
 
-# datetimes_fr & dates_fr
-
-`datetimes_fr` turn your datetimes into a french format. `dates_fr` does the same thing, with only the dates. Please note that this is NOT a useful format to work with R. This function can only be used with a purpose of report, in order to have a very understandable format.
-
-```{r}
-Sys.time()
-
-datetimes_fr(Sys.time())
-
-dates_fr(Sys.time())
-
-```
-
 # wordfrequency, bigramfrequency & hashtagfrequency
 
 `wordfrequency` splits character strings into words and classifies them, so you know which ones are the most used. `bigramfrequency` does the same thing, but with bigrams. `hashtagfrequency` does the same thing, but with the hashtags. The possibility is offered to keep only part of this data.
@@ -55,6 +42,27 @@ edouaRd::rstats %>%
 
 edouaRd::rstats %>% 
   bigramfrequency(text, slice = 50)
+```
+
+# datetimes_fr & dates_fr
+
+`datetimes_fr` turn your datetimes into a french format. `dates_fr` does the same thing, with only the dates. Please note that this is NOT a useful format to work with R. This function can only be used with a purpose of report, in order to have a very understandable format.
+
+```{r}
+Sys.time()
+
+datetimes_fr(Sys.time())
+
+dates_fr(Sys.time())
+
+```
+
+# restore_dates
+
+`restore_dates` has the opposite effect to `datetimes_fr`; it restores the dates having a French format in a format usable by R.
+
+```{r}
+restore_dates("12/01/1993 21:45:36")
 ```
 
 # distribution_time
@@ -87,6 +95,16 @@ It is possible, as arguments, to also add a filter by hours, and to sort from ol
 ```{r}
 edouaRd::rstats %>% 
   choose_period(created_at, "2018-05-22", "2018-05-27", starttime = "16:00:00", endtime = "12:00:00", sort = TRUE)
+```
+
+# rm_empty_cols
+
+`rm_empty_cols` allows to delete the columns of an array containing only NAs.
+
+```{r}
+edouaRd::rstats
+
+rm_empty_cols(edouaRd::rstats)
 ```
 
 Please report issues and suggestions to the [issues tracker](https://github.com/edouardschuppert/edouaRd/issues).

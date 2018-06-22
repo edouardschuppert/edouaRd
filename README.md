@@ -23,29 +23,6 @@ povertext(c("Père Noël", "Où êtes-vous ?"))
 
     ## [1] "pere noel"      "ou etes-vous ?"
 
-datetimes\_fr & dates\_fr
-=========================
-
-`datetimes_fr` turn your datetimes into a french format. `dates_fr` does the same thing, with only the dates. Please note that this is NOT a useful format to work with R. This function can only be used with a purpose of report, in order to have a very understandable format.
-
-``` r
-Sys.time()
-```
-
-    ## [1] "2018-06-13 18:07:09 CEST"
-
-``` r
-datetimes_fr(Sys.time())
-```
-
-    ## [1] "13/06/2018 16:07:09"
-
-``` r
-dates_fr(Sys.time())
-```
-
-    ## [1] "13/06/2018"
-
 wordfrequency, bigramfrequency & hashtagfrequency
 =================================================
 
@@ -126,6 +103,40 @@ edouaRd::rstats %>%
     ## 10 cloud cloudcomputing          475
     ## # ... with 40 more rows
 
+datetimes\_fr & dates\_fr
+=========================
+
+`datetimes_fr` turn your datetimes into a french format. `dates_fr` does the same thing, with only the dates. Please note that this is NOT a useful format to work with R. This function can only be used with a purpose of report, in order to have a very understandable format.
+
+``` r
+Sys.time()
+```
+
+    ## [1] "2018-06-22 16:31:29 CEST"
+
+``` r
+datetimes_fr(Sys.time())
+```
+
+    ## [1] "22/06/2018 14:31:29"
+
+``` r
+dates_fr(Sys.time())
+```
+
+    ## [1] "22/06/2018"
+
+restore\_dates
+==============
+
+`restore_dates` has the opposite effect to `datetimes_fr`; it restores the dates having a French format in a format usable by R.
+
+``` r
+restore_dates("12/01/1993 21:45:36")
+```
+
+    ## [1] "1993-01-12 21:45:36 UTC"
+
 distribution\_time
 ==================
 
@@ -158,7 +169,7 @@ edouaRd::rstats %>%
   distribution_time(created_at, draw = TRUE)
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![](README_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
 choose\_period
 ==============
@@ -231,6 +242,72 @@ edouaRd::rstats %>%
     ## #   from_user_tweetcount <int>, from_user_followercount <int>,
     ## #   from_user_friendcount <int>, from_user_favourites_count <int>,
     ## #   from_user_listed <int>, from_user_withheld_scope <chr>,
+    ## #   from_user_created_at <dttm>
+
+rm\_empty\_cols
+===============
+
+`rm_empty_cols` allows to delete the columns of an array containing only NAs.
+
+``` r
+edouaRd::rstats
+```
+
+    ## # A tibble: 13,673 x 36
+    ##    id     time  created_at          from_user_name text       filter_level
+    ##    <chr>  <chr> <dttm>              <chr>          <chr>      <chr>       
+    ##  1 99784… 1526… 2018-05-19 14:21:04 NicholasStray… Redid my … none        
+    ##  2 99784… 1526… 2018-05-19 14:28:34 CMastication   "Are you … none        
+    ##  3 99784… 1526… 2018-05-19 14:30:40 jrosenberg6432 excited t… none        
+    ##  4 99784… 1526… 2018-05-19 14:30:47 lisafederer    Getting r… none        
+    ##  5 99784… 1526… 2018-05-19 14:36:11 RLadiesSantaFe ¡Las insc… none        
+    ##  6 99785… 1526… 2018-05-19 14:45:11 hrbrmstr       "cloc (ht… none        
+    ##  7 99785… 1526… 2018-05-19 14:45:49 hrbrmstr       "RT @CMas… none        
+    ##  8 99785… 1526… 2018-05-19 14:48:10 theredpea      RT @Nicho… none        
+    ##  9 99785… 1526… 2018-05-19 14:49:05 _StarKingdom   New artic… none        
+    ## 10 99785… 1526… 2018-05-19 14:50:36 tejendrapsingh RT @krlml… none        
+    ## # ... with 13,663 more rows, and 30 more variables:
+    ## #   possibly_sensitive <int>, withheld_copyright <chr>,
+    ## #   withheld_scope <chr>, truncated <chr>, retweet_count <int>,
+    ## #   favorite_count <int>, lang <chr>, to_user_name <chr>,
+    ## #   in_reply_to_status_id <chr>, quoted_status_id <chr>, source <chr>,
+    ## #   location <chr>, lat <chr>, lng <chr>, from_user_id <chr>,
+    ## #   from_user_realname <chr>, from_user_verified <int>,
+    ## #   from_user_description <chr>, from_user_url <chr>,
+    ## #   from_user_profile_image_url <chr>, from_user_utcoffset <chr>,
+    ## #   from_user_timezone <chr>, from_user_lang <chr>,
+    ## #   from_user_tweetcount <int>, from_user_followercount <int>,
+    ## #   from_user_friendcount <int>, from_user_favourites_count <int>,
+    ## #   from_user_listed <int>, from_user_withheld_scope <chr>,
+    ## #   from_user_created_at <dttm>
+
+``` r
+rm_empty_cols(edouaRd::rstats)
+```
+
+    ## # A tibble: 13,673 x 28
+    ##    id     time  created_at          from_user_name text       filter_level
+    ##    <chr>  <chr> <dttm>              <chr>          <chr>      <chr>       
+    ##  1 99784… 1526… 2018-05-19 14:21:04 NicholasStray… Redid my … none        
+    ##  2 99784… 1526… 2018-05-19 14:28:34 CMastication   "Are you … none        
+    ##  3 99784… 1526… 2018-05-19 14:30:40 jrosenberg6432 excited t… none        
+    ##  4 99784… 1526… 2018-05-19 14:30:47 lisafederer    Getting r… none        
+    ##  5 99784… 1526… 2018-05-19 14:36:11 RLadiesSantaFe ¡Las insc… none        
+    ##  6 99785… 1526… 2018-05-19 14:45:11 hrbrmstr       "cloc (ht… none        
+    ##  7 99785… 1526… 2018-05-19 14:45:49 hrbrmstr       "RT @CMas… none        
+    ##  8 99785… 1526… 2018-05-19 14:48:10 theredpea      RT @Nicho… none        
+    ##  9 99785… 1526… 2018-05-19 14:49:05 _StarKingdom   New artic… none        
+    ## 10 99785… 1526… 2018-05-19 14:50:36 tejendrapsingh RT @krlml… none        
+    ## # ... with 13,663 more rows, and 22 more variables:
+    ## #   possibly_sensitive <int>, retweet_count <int>, favorite_count <int>,
+    ## #   lang <chr>, to_user_name <chr>, in_reply_to_status_id <chr>,
+    ## #   quoted_status_id <chr>, source <chr>, location <chr>,
+    ## #   from_user_id <chr>, from_user_realname <chr>,
+    ## #   from_user_verified <int>, from_user_description <chr>,
+    ## #   from_user_url <chr>, from_user_profile_image_url <chr>,
+    ## #   from_user_lang <chr>, from_user_tweetcount <int>,
+    ## #   from_user_followercount <int>, from_user_friendcount <int>,
+    ## #   from_user_favourites_count <int>, from_user_listed <int>,
     ## #   from_user_created_at <dttm>
 
 Please report issues and suggestions to the [issues tracker](https://github.com/edouardschuppert/edouaRd/issues).

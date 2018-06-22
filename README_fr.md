@@ -23,29 +23,6 @@ povertext(c("Père Noël", "Où êtes-vous ?"))
 
     ## [1] "pere noel"      "ou etes-vous ?"
 
-datetimes\_fr & dates\_fr
-=========================
-
-`datetimes_fr` transforme les dates et heures en un format français. `dates_fr` fait la même chose mais uniquement avec les dates. Il faut noter que ceci n'est PAS un format utile pour travailler avec R. Cette fonction ne peut être utilisée que dans un but de rapport ou de présentation, afin d'obtenir un format très compréhensible.
-
-``` r
-Sys.time()
-```
-
-    ## [1] "2018-06-13 18:06:43 CEST"
-
-``` r
-datetimes_fr(Sys.time())
-```
-
-    ## [1] "13/06/2018 16:06:43"
-
-``` r
-dates_fr(Sys.time())
-```
-
-    ## [1] "13/06/2018"
-
 wordfrequency, bigramfrequency & hashtagfrequency
 =================================================
 
@@ -126,6 +103,40 @@ edouaRd::rstats %>%
     ## 10 cloud cloudcomputing          475
     ## # ... with 40 more rows
 
+datetimes\_fr & dates\_fr
+=========================
+
+`datetimes_fr` transforme les dates et heures en un format français. `dates_fr` fait la même chose mais uniquement avec les dates. Il faut noter que ceci n'est PAS un format utile pour travailler avec R. Cette fonction ne peut être utilisée que dans un but de rapport ou de présentation, afin d'obtenir un format très compréhensible.
+
+``` r
+Sys.time()
+```
+
+    ## [1] "2018-06-22 16:32:26 CEST"
+
+``` r
+datetimes_fr(Sys.time())
+```
+
+    ## [1] "22/06/2018 14:32:26"
+
+``` r
+dates_fr(Sys.time())
+```
+
+    ## [1] "22/06/2018"
+
+restore\_dates
+==============
+
+`restore_dates` provoque l'effet inverse à celui de `datetimes_fr` ; il restaure les dates ayant un format français en un format utilisable par R.
+
+``` r
+restore_dates("12/01/1993 21:45:36")
+```
+
+    ## [1] "1993-01-12 21:45:36 UTC"
+
 distribution\_time
 ==================
 
@@ -158,7 +169,7 @@ edouaRd::rstats %>%
   distribution_time(created_at, draw = TRUE)
 ```
 
-![](README_fr_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![](README_fr_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
 choose\_period
 ==============
@@ -231,6 +242,72 @@ edouaRd::rstats %>%
     ## #   from_user_tweetcount <int>, from_user_followercount <int>,
     ## #   from_user_friendcount <int>, from_user_favourites_count <int>,
     ## #   from_user_listed <int>, from_user_withheld_scope <chr>,
+    ## #   from_user_created_at <dttm>
+
+rm\_empty\_cols
+===============
+
+`rm_empty_cols` permet de supprimer les colonnes d'un tableau ne comprenant que des NA.
+
+``` r
+edouaRd::rstats
+```
+
+    ## # A tibble: 13,673 x 36
+    ##    id     time  created_at          from_user_name text       filter_level
+    ##    <chr>  <chr> <dttm>              <chr>          <chr>      <chr>       
+    ##  1 99784… 1526… 2018-05-19 14:21:04 NicholasStray… Redid my … none        
+    ##  2 99784… 1526… 2018-05-19 14:28:34 CMastication   "Are you … none        
+    ##  3 99784… 1526… 2018-05-19 14:30:40 jrosenberg6432 excited t… none        
+    ##  4 99784… 1526… 2018-05-19 14:30:47 lisafederer    Getting r… none        
+    ##  5 99784… 1526… 2018-05-19 14:36:11 RLadiesSantaFe ¡Las insc… none        
+    ##  6 99785… 1526… 2018-05-19 14:45:11 hrbrmstr       "cloc (ht… none        
+    ##  7 99785… 1526… 2018-05-19 14:45:49 hrbrmstr       "RT @CMas… none        
+    ##  8 99785… 1526… 2018-05-19 14:48:10 theredpea      RT @Nicho… none        
+    ##  9 99785… 1526… 2018-05-19 14:49:05 _StarKingdom   New artic… none        
+    ## 10 99785… 1526… 2018-05-19 14:50:36 tejendrapsingh RT @krlml… none        
+    ## # ... with 13,663 more rows, and 30 more variables:
+    ## #   possibly_sensitive <int>, withheld_copyright <chr>,
+    ## #   withheld_scope <chr>, truncated <chr>, retweet_count <int>,
+    ## #   favorite_count <int>, lang <chr>, to_user_name <chr>,
+    ## #   in_reply_to_status_id <chr>, quoted_status_id <chr>, source <chr>,
+    ## #   location <chr>, lat <chr>, lng <chr>, from_user_id <chr>,
+    ## #   from_user_realname <chr>, from_user_verified <int>,
+    ## #   from_user_description <chr>, from_user_url <chr>,
+    ## #   from_user_profile_image_url <chr>, from_user_utcoffset <chr>,
+    ## #   from_user_timezone <chr>, from_user_lang <chr>,
+    ## #   from_user_tweetcount <int>, from_user_followercount <int>,
+    ## #   from_user_friendcount <int>, from_user_favourites_count <int>,
+    ## #   from_user_listed <int>, from_user_withheld_scope <chr>,
+    ## #   from_user_created_at <dttm>
+
+``` r
+rm_empty_cols(edouaRd::rstats)
+```
+
+    ## # A tibble: 13,673 x 28
+    ##    id     time  created_at          from_user_name text       filter_level
+    ##    <chr>  <chr> <dttm>              <chr>          <chr>      <chr>       
+    ##  1 99784… 1526… 2018-05-19 14:21:04 NicholasStray… Redid my … none        
+    ##  2 99784… 1526… 2018-05-19 14:28:34 CMastication   "Are you … none        
+    ##  3 99784… 1526… 2018-05-19 14:30:40 jrosenberg6432 excited t… none        
+    ##  4 99784… 1526… 2018-05-19 14:30:47 lisafederer    Getting r… none        
+    ##  5 99784… 1526… 2018-05-19 14:36:11 RLadiesSantaFe ¡Las insc… none        
+    ##  6 99785… 1526… 2018-05-19 14:45:11 hrbrmstr       "cloc (ht… none        
+    ##  7 99785… 1526… 2018-05-19 14:45:49 hrbrmstr       "RT @CMas… none        
+    ##  8 99785… 1526… 2018-05-19 14:48:10 theredpea      RT @Nicho… none        
+    ##  9 99785… 1526… 2018-05-19 14:49:05 _StarKingdom   New artic… none        
+    ## 10 99785… 1526… 2018-05-19 14:50:36 tejendrapsingh RT @krlml… none        
+    ## # ... with 13,663 more rows, and 22 more variables:
+    ## #   possibly_sensitive <int>, retweet_count <int>, favorite_count <int>,
+    ## #   lang <chr>, to_user_name <chr>, in_reply_to_status_id <chr>,
+    ## #   quoted_status_id <chr>, source <chr>, location <chr>,
+    ## #   from_user_id <chr>, from_user_realname <chr>,
+    ## #   from_user_verified <int>, from_user_description <chr>,
+    ## #   from_user_url <chr>, from_user_profile_image_url <chr>,
+    ## #   from_user_lang <chr>, from_user_tweetcount <int>,
+    ## #   from_user_followercount <int>, from_user_friendcount <int>,
+    ## #   from_user_favourites_count <int>, from_user_listed <int>,
     ## #   from_user_created_at <dttm>
 
 Pour toute question ou suggestion, merci de consulter la section [issues tracker](https://github.com/edouardschuppert/edouaRd/issues).

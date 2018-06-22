@@ -27,19 +27,6 @@ povertext(c("Père Noël", "Où êtes-vous ?"))
 
 ```
 
-# datetimes_fr & dates_fr
-
-`datetimes_fr` transforme les dates et heures en un format français. `dates_fr` fait la même chose mais uniquement avec les dates. Il faut noter que ceci n'est PAS un format utile pour travailler avec R. Cette fonction ne peut être utilisée que dans un but de rapport ou de présentation, afin d'obtenir un format très compréhensible.
-
-```{r}
-Sys.time()
-
-datetimes_fr(Sys.time())
-
-dates_fr(Sys.time())
-
-```
-
 # wordfrequency, bigramfrequency & hashtagfrequency
 
 `wordfrequency` découpe les phrases en mots et les classe, permettant ainsi de savoir lesquels sont les plus utilisés. `bigramfrequency` fait la même chose, mais avec des bigrams. `hashtagfrequency` fait la même chose, mais avec les hashtags. La possibilité est offerte de ne garder qu'une partie de ces données.
@@ -55,6 +42,27 @@ edouaRd::rstats %>%
 
 edouaRd::rstats %>% 
   bigramfrequency(text, slice = 50)
+```
+
+# datetimes_fr & dates_fr
+
+`datetimes_fr` transforme les dates et heures en un format français. `dates_fr` fait la même chose mais uniquement avec les dates. Il faut noter que ceci n'est PAS un format utile pour travailler avec R. Cette fonction ne peut être utilisée que dans un but de rapport ou de présentation, afin d'obtenir un format très compréhensible.
+
+```{r}
+Sys.time()
+
+datetimes_fr(Sys.time())
+
+dates_fr(Sys.time())
+
+```
+
+# restore_dates
+
+`restore_dates` provoque l'effet inverse à celui de `datetimes_fr` ; il restaure les dates ayant un format français en un format utilisable par R.
+
+```{r}
+restore_dates("12/01/1993 21:45:36")
 ```
 
 # distribution_time
@@ -88,5 +96,16 @@ Il est possible, comme arguments, d'ajouter également un filtre par heures, et 
 edouaRd::rstats %>% 
   choose_period(created_at, "2018-05-22", "2018-05-27", starttime = "16:00:00", endtime = "12:00:00", sort = TRUE)
 ```
+
+# rm_empty_cols
+
+`rm_empty_cols` permet de supprimer les colonnes d'un tableau ne comprenant que des NA.
+
+```{r}
+edouaRd::rstats
+
+rm_empty_cols(edouaRd::rstats)
+```
+
 
 Pour toute question ou suggestion, merci de consulter la section [issues tracker](https://github.com/edouardschuppert/edouaRd/issues).
