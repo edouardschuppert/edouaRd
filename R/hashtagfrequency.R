@@ -27,7 +27,8 @@ hashtagfrequency <- function(df, colonne, slice = NA, original = FALSE) {
     dplyr::select(hashtags, n)
 
   df_new <- df_new %>%
-    dplyr::filter(hashtags != "#n")
+    dplyr::filter(hashtags != "#n" &
+                    hashtags != "#0")
 
   # Keep only the desired length
   if (is.na(slice) == FALSE) {
