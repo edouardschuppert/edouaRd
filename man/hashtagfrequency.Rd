@@ -4,7 +4,7 @@
 \alias{hashtagfrequency}
 \title{hashtagfrequency}
 \usage{
-hashtagfrequency(df, colonne, slice = NA)
+hashtagfrequency(df, colonne, slice = NA, original = FALSE)
 }
 \arguments{
 \item{df}{Your data frame}
@@ -12,6 +12,8 @@ hashtagfrequency(df, colonne, slice = NA)
 \item{colonne}{Your column}
 
 \item{slice}{Allows you to keep only a small number of observations, starting from the first. Default set to NA}
+
+\item{original}{Returns the original case of hashtags. Caution : can be very slow. Default set to FALSE}
 }
 \value{
 Return the hashtag frequency of the column you chose

@@ -3,15 +3,16 @@
 #' @param df Your data frame
 #' @param colonne Your column
 #' @param slice Allows you to keep only a small number of observations, starting from the first. Default set to NA
+#' @param original Returns the original case of hashtags. Caution : can be very slow. Default set to FALSE
 #' @return Return the hashtag frequency of the column you chose
 #' @export
 
-hashtagfrequency <- function(df, colonne, slice = NA) {
+hashtagfrequency <- function(df, colonne, slice = NA, original = FALSE) {
 
   colonne <- rlang::enquo(colonne)
 
   # Processing
-  df <- df %>%
+  df_new <- df %>%
     dplyr::select(!!colonne) %>%
     dplyr::mutate(colonne = povertext(!!colonne)) %>%
     dplyr::mutate(hash = as.character(stringr::str_extract_all(colonne, "(?:(?:^|[[:space:]]+)|(?:[[:punct:]])?)#(?:[^[:blank:]]*|[^[:space:]]*)(?:(?:(?:[[:punct:]])?|[[:space:]])|$)"))) %>%
@@ -23,19 +24,42 @@ hashtagfrequency <- function(df, colonne, slice = NA) {
     dplyr::count(words) %>%
     dplyr::arrange(desc(n)) %>%
     dplyr::mutate(hashtags = paste0("#", words)) %>%
-    dplyr::select(hashtags, n) %>%
-    dplyr::filter(stringr::str_detect(hashtags, paste(c("^#character$", "^#0$"), collapse = "|")) == FALSE)
+    dplyr::select(hashtags, n)
+
+  df_new <- df_new %>%
+    dplyr::filter(hashtags != "#n")
 
   # Keep only the desired length
   if (is.na(slice) == FALSE) {
 
-    df <- df %>%
+    df_new <- df_new %>%
       dplyr::slice(1:slice)
 
   }
 
-  df
+  # Search the original hashtag case
+  if (original == TRUE) {
+
+    i <- as.numeric(nrow(df_new))
+    while (i != 0) {
+
+      temp_request <- df_new$hashtags[i]
+
+      request <- df %>%
+        dplyr::filter(stringr::str_detect(povertext(!!colonne), temp_request)) %>%
+        dplyr::mutate(xx = stringr::str_extract(!!colonne, stringr::regex(temp_request, ignore_case = TRUE))) %>%
+        dplyr::count(xx, sort = TRUE)
+
+      df_new$hashtags[i] <- request$xx[1]
+
+      rm(temp_request, request)
+
+      i <- i - 1
+    }
+
+
+  }
+
+  df_new
 
 }
-
-# Récupérer bon hashtags avec la casse par système de tableau comparatif
