@@ -1,11 +1,11 @@
-#' hashtagfrequency
+#' sampler
 #'
 #' @param df Your data frame
-#' @param colonne Your column
-#' @param slice Allows you to keep only a small number of observations, starting from the first. Default set to NA
-#' @return Return the hashtag frequency of the column you chose
-#' @export
+#' @param nb Number of observations for the sample
+#' @return Return a sample of a dataframe
 
-# corpus.hasard <- donnees.import[sample(1:as.numeric(length(donnees.import$id)), 500),]
+sampler <- function(df, nb = nrow(df)) {
 
-# Fonction d'échantillonnage à faire
+  df[sample(1:as.numeric(nrow(df)), nb),]
+
+}
