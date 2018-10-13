@@ -28,7 +28,9 @@ hashtagfrequency <- function(df, colonne, slice = NA, original = FALSE) {
 
   df_new <- df_new %>%
     dplyr::filter(hashtags != "#n" &
-                    hashtags != "#0")
+                    hashtags != "#0" &
+                    hashtags != "#u" &
+                    hashtags != "#character")
 
   # Keep only the desired length
   if (is.na(slice) == FALSE) {
@@ -48,7 +50,13 @@ hashtagfrequency <- function(df, colonne, slice = NA, original = FALSE) {
 
       request <- df %>%
         dplyr::filter(stringr::str_detect(povertext(!!colonne), temp_request)) %>%
-        dplyr::mutate(xx = stringr::str_extract(!!colonne, stringr::regex(temp_request, ignore_case = TRUE))) %>%
+        dplyr::mutate(text = !!colonne,
+                      text =  stringr::str_replace_all(text, "(?:(?:(?:é|ê)|è)|ë)", "e"),
+                      text = stringr::str_replace_all(text, "(?:(?:à|â)|ä)", "a"),
+                      text = stringr::str_replace_all(text, "(?:(?:û|ù)|ü)","u"),
+                      text = stringr::str_replace_all(text, "(?:î|ï)", "i"),
+                      text = stringr::str_replace_all(text, "(?:ö|ô)", "o")) %>%
+        dplyr::mutate(xx = stringr::str_extract(text, stringr::regex(temp_request, ignore_case = TRUE))) %>%
         dplyr::count(xx, sort = TRUE)
 
       df_new$hashtags[i] <- request$xx[1]
