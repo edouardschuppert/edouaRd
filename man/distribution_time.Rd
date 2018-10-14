@@ -4,12 +4,14 @@
 \alias{distribution_time}
 \title{distribution_time}
 \usage{
-distribution_time(df, colonne, draw = FALSE)
+distribution_time(df, colonne, granularity = "day", draw = FALSE)
 }
 \arguments{
 \item{df}{Your data frame}
 
 \item{colonne}{Your column}
+
+\item{granularity}{Change the granularity of the work, possible: "year", "month", "day", "hour", "minute","second". Default set to "day"}
 
 \item{draw}{Ability to return a ggplot2 schema to view the distribution. Default set to FALSE}
 }
