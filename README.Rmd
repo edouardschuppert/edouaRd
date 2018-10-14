@@ -38,7 +38,7 @@ edouaRd::rstats %>%
   wordfrequency(text)
 
 edouaRd::rstats %>% 
-  hashtagfrequency(text, slice = 50)
+  hashtagfrequency(text, slice = 30, original = TRUE)
 
 edouaRd::rstats %>% 
   bigramfrequency(text, slice = 50)
@@ -71,14 +71,14 @@ restore_dates("12/01/1993 21:45:36")
 
 ```{r}
 edouaRd::rstats %>% 
-  distribution_time(created_at)
+  distribution_time(created_at, granularity = "hour")
 ```
 
 With the `draw` argument, this distribution can be expressed more visually.
 
 ```{r}
 edouaRd::rstats %>% 
-  distribution_time(created_at, draw = TRUE)
+  distribution_time(created_at, granularity = "hour", draw = TRUE)
 ```
 
 # choose_period
@@ -105,6 +105,14 @@ edouaRd::rstats %>%
 edouaRd::rstats
 
 rm_empty_cols(edouaRd::rstats)
+```
+
+# sampler
+
+`sampler`  allows to take a random sample in a dataframe.
+
+```{r}
+sampler(edouaRd::rstats, 3)
 ```
 
 Please report issues and suggestions to the [issues tracker](https://github.com/edouardschuppert/edouaRd/issues).

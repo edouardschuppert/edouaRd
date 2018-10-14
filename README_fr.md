@@ -32,56 +32,56 @@ wordfrequency, bigramfrequency & hashtagfrequency
 library(tidyverse, quietly = TRUE)
 ```
 
-    ## ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──
+    ## -- Attaching packages ---------------------- tidyverse 1.2.1 --
 
-    ## ✔ ggplot2 2.2.1.9000     ✔ purrr   0.2.5     
-    ## ✔ tibble  1.4.2          ✔ dplyr   0.7.5     
-    ## ✔ tidyr   0.8.1          ✔ stringr 1.3.1     
-    ## ✔ readr   1.1.1          ✔ forcats 0.3.0
+    ## v ggplot2 3.0.0     v purrr   0.2.5
+    ## v tibble  1.4.2     v dplyr   0.7.6
+    ## v tidyr   0.8.1     v stringr 1.3.1
+    ## v readr   1.1.1     v forcats 0.3.0
 
-    ## ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
-    ## ✖ dplyr::filter() masks stats::filter()
-    ## ✖ dplyr::lag()    masks stats::lag()
+    ## -- Conflicts ------------------------- tidyverse_conflicts() --
+    ## x dplyr::filter() masks stats::filter()
+    ## x dplyr::lag()    masks stats::lag()
 
 ``` r
 edouaRd::rstats %>% 
   wordfrequency(text)
 ```
 
-    ## # A tibble: 10,090 x 2
-    ##    words               n
-    ##    <chr>           <int>
-    ##  1 rstats          13757
-    ##  2 datascience      4407
-    ##  3 data             2862
-    ##  4 bigdata          2796
-    ##  5 python           2746
-    ##  6 machinelearning  2488
-    ##  7 analytics        1899
-    ##  8 ai               1568
-    ##  9 gp_pulipaka      1280
-    ## 10 dataviz          1215
-    ## # ... with 10,080 more rows
+    ## # A tibble: 3,279 x 2
+    ##    words           n
+    ##    <chr>       <int>
+    ##  1 rstats       2038
+    ##  2 datascience   600
+    ##  3 python        514
+    ##  4 bigdata       448
+    ##  5 analytics     421
+    ##  6 javascript    401
+    ##  7 reactjs       389
+    ##  8 vuejs         389
+    ##  9 golang        385
+    ## 10 serverless    382
+    ## # ... with 3,269 more rows
 
 ``` r
 edouaRd::rstats %>% 
-  hashtagfrequency(text, slice = 50)
+  hashtagfrequency(text, slice = 30, original = TRUE)
 ```
 
-    ## # A tibble: 50 x 2
-    ##    hashtags             n
-    ##    <chr>            <int>
-    ##  1 #rstats          13715
-    ##  2 #datascience      4405
-    ##  3 #bigdata          2774
-    ##  4 #machinelearning  2475
-    ##  5 #python           2294
-    ##  6 #analytics        1754
-    ##  7 #ai               1530
-    ##  8 #dataviz          1194
-    ##  9 #golang           1124
-    ## 10 #javascript       1092
-    ## # ... with 40 more rows
+    ## # A tibble: 30 x 2
+    ##    hashtags         n
+    ##    <chr>        <int>
+    ##  1 #rstats       2038
+    ##  2 #DataScience   600
+    ##  3 #Python        462
+    ##  4 #BigData       448
+    ##  5 #Analytics     413
+    ##  6 #JavaScript    391
+    ##  7 #ReactJS       389
+    ##  8 #VueJS         389
+    ##  9 #GoLang        385
+    ## 10 #Serverless    382
+    ## # ... with 20 more rows
 
 ``` r
 edouaRd::rstats %>% 
@@ -89,18 +89,18 @@ edouaRd::rstats %>%
 ```
 
     ## # A tibble: 50 x 2
-    ##    bigram                          n
-    ##    <chr>                       <int>
-    ##  1 python rstats                1290
-    ##  2 datascience ai               1117
-    ##  3 machinelearning datascience  1089
-    ##  4 bigdata machinelearning      1045
-    ##  5 rstats datascience           1035
-    ##  6 bigdata datascience           782
-    ##  7 cloudcomputing serverless     697
-    ##  8 abdsc bigdata                 537
-    ##  9 java javascript               506
-    ## 10 cloud cloudcomputing          475
+    ##    bigram                        n
+    ##    <chr>                     <int>
+    ##  1 python rstats               410
+    ##  2 reactjs vuejs               389
+    ##  3 javascript reactjs          381
+    ##  4 vuejs golang                378
+    ##  5 bigdata analytics           374
+    ##  6 java javascript             341
+    ##  7 rstats tensorflow           339
+    ##  8 datascience ai              307
+    ##  9 cloudcomputing serverless   300
+    ## 10 tensorflow java             281
     ## # ... with 40 more rows
 
 datetimes\_fr & dates\_fr
@@ -112,19 +112,19 @@ datetimes\_fr & dates\_fr
 Sys.time()
 ```
 
-    ## [1] "2018-06-22 16:32:26 CEST"
+    ## [1] "2018-10-14 02:18:20 CEST"
 
 ``` r
 datetimes_fr(Sys.time())
 ```
 
-    ## [1] "22/06/2018 14:32:26"
+    ## [1] "14/10/2018 00:18:20"
 
 ``` r
 dates_fr(Sys.time())
 ```
 
-    ## [1] "22/06/2018"
+    ## [1] "14/10/2018"
 
 restore\_dates
 ==============
@@ -144,29 +144,29 @@ distribution\_time
 
 ``` r
 edouaRd::rstats %>% 
-  distribution_time(created_at)
+  distribution_time(created_at, granularity = "hour")
 ```
 
-    ## # A tibble: 11 x 2
-    ##    created_at     n
-    ##    <date>     <int>
-    ##  1 2018-05-19   265
-    ##  2 2018-05-20   817
-    ##  3 2018-05-21   979
-    ##  4 2018-05-22  1550
-    ##  5 2018-05-23  1697
-    ##  6 2018-05-24  1738
-    ##  7 2018-05-25  1886
-    ##  8 2018-05-26  1128
-    ##  9 2018-05-27  1274
-    ## 10 2018-05-28  1532
-    ## 11 2018-05-29   807
+    ## # A tibble: 22 x 2
+    ##    created_at              n
+    ##    <dttm>              <int>
+    ##  1 2018-07-11 12:00:00    50
+    ##  2 2018-07-11 13:00:00   157
+    ##  3 2018-07-11 14:00:00    97
+    ##  4 2018-07-11 15:00:00   104
+    ##  5 2018-07-11 16:00:00   100
+    ##  6 2018-07-11 17:00:00    62
+    ##  7 2018-07-11 18:00:00    82
+    ##  8 2018-07-11 19:00:00    98
+    ##  9 2018-07-11 20:00:00    69
+    ## 10 2018-07-11 21:00:00   107
+    ## # ... with 12 more rows
 
 Avec l'argument draw, cette distribution peut être exprimée de manière plus visuelle.
 
 ``` r
 edouaRd::rstats %>% 
-  distribution_time(created_at, draw = TRUE)
+  distribution_time(created_at, granularity = "hour", draw = TRUE)
 ```
 
 ![](README_fr_files/figure-markdown_github/unnamed-chunk-7-1.png)
@@ -181,33 +181,41 @@ edouaRd::rstats %>%
   choose_period(created_at, "2018-05-22", "2018-05-27")
 ```
 
-    ## # A tibble: 9,273 x 36
-    ##    id     time  created_at          from_user_name text       filter_level
-    ##    <chr>  <chr> <dttm>              <chr>          <chr>      <chr>       
-    ##  1 99871… 1526… 2018-05-22 00:00:13 Rbloggers      Competiti… none        
-    ##  2 99871… 1526… 2018-05-22 00:00:27 ttibensky      RT @KirkD… none        
-    ##  3 99871… 1526… 2018-05-22 00:00:34 renato_umeton  RT @Rblog… none        
-    ##  4 99871… 1526… 2018-05-22 00:00:40 kierisi        I can't g… none        
-    ##  5 99871… 1526… 2018-05-22 00:01:08 keita321231    RT @hadle… none        
-    ##  6 99871… 1526… 2018-05-22 00:01:39 mdancho84      RT @hadle… none        
-    ##  7 99871… 1526… 2018-05-22 00:02:58 LeeLeo1993     "RT @data… none        
-    ##  8 99871… 1526… 2018-05-22 00:04:33 pamhanway      RT @paulv… none        
-    ##  9 99871… 1526… 2018-05-22 00:06:40 Addifaerber    Problem: … none        
-    ## 10 99871… 1526… 2018-05-22 00:07:02 jmkreinz       RT @hadle… none        
-    ## # ... with 9,263 more rows, and 30 more variables:
-    ## #   possibly_sensitive <int>, withheld_copyright <chr>,
-    ## #   withheld_scope <chr>, truncated <chr>, retweet_count <int>,
-    ## #   favorite_count <int>, lang <chr>, to_user_name <chr>,
-    ## #   in_reply_to_status_id <chr>, quoted_status_id <chr>, source <chr>,
-    ## #   location <chr>, lat <chr>, lng <chr>, from_user_id <chr>,
-    ## #   from_user_realname <chr>, from_user_verified <int>,
-    ## #   from_user_description <chr>, from_user_url <chr>,
-    ## #   from_user_profile_image_url <chr>, from_user_utcoffset <chr>,
-    ## #   from_user_timezone <chr>, from_user_lang <chr>,
-    ## #   from_user_tweetcount <int>, from_user_followercount <int>,
-    ## #   from_user_friendcount <int>, from_user_favourites_count <int>,
-    ## #   from_user_listed <int>, from_user_withheld_scope <chr>,
-    ## #   from_user_created_at <dttm>
+    ## # A tibble: 0 x 88
+    ## # ... with 88 variables: user_id <chr>, status_id <chr>,
+    ## #   created_at <dttm>, screen_name <chr>, text <chr>, source <chr>,
+    ## #   display_text_width <dbl>, reply_to_status_id <chr>,
+    ## #   reply_to_user_id <chr>, reply_to_screen_name <chr>, is_quote <lgl>,
+    ## #   is_retweet <lgl>, favorite_count <int>, retweet_count <int>,
+    ## #   hashtags <list>, symbols <list>, urls_url <list>, urls_t.co <list>,
+    ## #   urls_expanded_url <list>, media_url <list>, media_t.co <list>,
+    ## #   media_expanded_url <list>, media_type <list>, ext_media_url <list>,
+    ## #   ext_media_t.co <list>, ext_media_expanded_url <list>,
+    ## #   ext_media_type <chr>, mentions_user_id <list>,
+    ## #   mentions_screen_name <list>, lang <chr>, quoted_status_id <chr>,
+    ## #   quoted_text <chr>, quoted_created_at <dttm>, quoted_source <chr>,
+    ## #   quoted_favorite_count <int>, quoted_retweet_count <int>,
+    ## #   quoted_user_id <chr>, quoted_screen_name <chr>, quoted_name <chr>,
+    ## #   quoted_followers_count <int>, quoted_friends_count <int>,
+    ## #   quoted_statuses_count <int>, quoted_location <chr>,
+    ## #   quoted_description <chr>, quoted_verified <lgl>,
+    ## #   retweet_status_id <chr>, retweet_text <chr>,
+    ## #   retweet_created_at <dttm>, retweet_source <chr>,
+    ## #   retweet_favorite_count <int>, retweet_retweet_count <int>,
+    ## #   retweet_user_id <chr>, retweet_screen_name <chr>, retweet_name <chr>,
+    ## #   retweet_followers_count <int>, retweet_friends_count <int>,
+    ## #   retweet_statuses_count <int>, retweet_location <chr>,
+    ## #   retweet_description <chr>, retweet_verified <lgl>, place_url <chr>,
+    ## #   place_name <chr>, place_full_name <chr>, place_type <chr>,
+    ## #   country <chr>, country_code <chr>, geo_coords <list>,
+    ## #   coords_coords <list>, bbox_coords <list>, status_url <chr>,
+    ## #   name <chr>, location <chr>, description <chr>, url <chr>,
+    ## #   protected <lgl>, followers_count <int>, friends_count <int>,
+    ## #   listed_count <int>, statuses_count <int>, favourites_count <int>,
+    ## #   account_created_at <dttm>, verified <lgl>, profile_url <chr>,
+    ## #   profile_expanded_url <chr>, account_lang <chr>,
+    ## #   profile_banner_url <chr>, profile_background_url <chr>,
+    ## #   profile_image_url <chr>
 
 Il est possible, comme arguments, d'ajouter également un filtre par heures, et d'opérer un tri du plus ancien au plus récent.
 
@@ -216,33 +224,41 @@ edouaRd::rstats %>%
   choose_period(created_at, "2018-05-22", "2018-05-27", starttime = "16:00:00", endtime = "12:00:00", sort = TRUE)
 ```
 
-    ## # A tibble: 7,707 x 36
-    ##    id     time  created_at          from_user_name text       filter_level
-    ##    <chr>  <chr> <dttm>              <chr>          <chr>      <chr>       
-    ##  1 99895… 1527… 2018-05-22 16:00:01 RLangTip       List of R… none        
-    ##  2 99895… 1527… 2018-05-22 16:00:29 Photogratte    RT @RLang… none        
-    ##  3 99895… 1527… 2018-05-22 16:00:33 ALuisaPinho    RT @danil… none        
-    ##  4 99895… 1527… 2018-05-22 16:00:48 JimChurch2     RT @RLang… none        
-    ##  5 99895… 1527… 2018-05-22 16:01:30 idtince        RT @theot… none        
-    ##  6 99895… 1527… 2018-05-22 16:01:51 FunkyCity2     RT @RLang… none        
-    ##  7 99895… 1527… 2018-05-22 16:02:09 CRANberriesFe… CRAN upda… none        
-    ##  8 99895… 1527… 2018-05-22 16:02:15 infj_ingrid    RT @Janin… none        
-    ##  9 99895… 1527… 2018-05-22 16:02:21 5berto         RT @RLang… none        
-    ## 10 99895… 1527… 2018-05-22 16:02:34 CL_Booth       RT @RLang… none        
-    ## # ... with 7,697 more rows, and 30 more variables:
-    ## #   possibly_sensitive <int>, withheld_copyright <chr>,
-    ## #   withheld_scope <chr>, truncated <chr>, retweet_count <int>,
-    ## #   favorite_count <int>, lang <chr>, to_user_name <chr>,
-    ## #   in_reply_to_status_id <chr>, quoted_status_id <chr>, source <chr>,
-    ## #   location <chr>, lat <chr>, lng <chr>, from_user_id <chr>,
-    ## #   from_user_realname <chr>, from_user_verified <int>,
-    ## #   from_user_description <chr>, from_user_url <chr>,
-    ## #   from_user_profile_image_url <chr>, from_user_utcoffset <chr>,
-    ## #   from_user_timezone <chr>, from_user_lang <chr>,
-    ## #   from_user_tweetcount <int>, from_user_followercount <int>,
-    ## #   from_user_friendcount <int>, from_user_favourites_count <int>,
-    ## #   from_user_listed <int>, from_user_withheld_scope <chr>,
-    ## #   from_user_created_at <dttm>
+    ## # A tibble: 0 x 88
+    ## # ... with 88 variables: user_id <chr>, status_id <chr>,
+    ## #   created_at <dttm>, screen_name <chr>, text <chr>, source <chr>,
+    ## #   display_text_width <dbl>, reply_to_status_id <chr>,
+    ## #   reply_to_user_id <chr>, reply_to_screen_name <chr>, is_quote <lgl>,
+    ## #   is_retweet <lgl>, favorite_count <int>, retweet_count <int>,
+    ## #   hashtags <list>, symbols <list>, urls_url <list>, urls_t.co <list>,
+    ## #   urls_expanded_url <list>, media_url <list>, media_t.co <list>,
+    ## #   media_expanded_url <list>, media_type <list>, ext_media_url <list>,
+    ## #   ext_media_t.co <list>, ext_media_expanded_url <list>,
+    ## #   ext_media_type <chr>, mentions_user_id <list>,
+    ## #   mentions_screen_name <list>, lang <chr>, quoted_status_id <chr>,
+    ## #   quoted_text <chr>, quoted_created_at <dttm>, quoted_source <chr>,
+    ## #   quoted_favorite_count <int>, quoted_retweet_count <int>,
+    ## #   quoted_user_id <chr>, quoted_screen_name <chr>, quoted_name <chr>,
+    ## #   quoted_followers_count <int>, quoted_friends_count <int>,
+    ## #   quoted_statuses_count <int>, quoted_location <chr>,
+    ## #   quoted_description <chr>, quoted_verified <lgl>,
+    ## #   retweet_status_id <chr>, retweet_text <chr>,
+    ## #   retweet_created_at <dttm>, retweet_source <chr>,
+    ## #   retweet_favorite_count <int>, retweet_retweet_count <int>,
+    ## #   retweet_user_id <chr>, retweet_screen_name <chr>, retweet_name <chr>,
+    ## #   retweet_followers_count <int>, retweet_friends_count <int>,
+    ## #   retweet_statuses_count <int>, retweet_location <chr>,
+    ## #   retweet_description <chr>, retweet_verified <lgl>, place_url <chr>,
+    ## #   place_name <chr>, place_full_name <chr>, place_type <chr>,
+    ## #   country <chr>, country_code <chr>, geo_coords <list>,
+    ## #   coords_coords <list>, bbox_coords <list>, status_url <chr>,
+    ## #   name <chr>, location <chr>, description <chr>, url <chr>,
+    ## #   protected <lgl>, followers_count <int>, friends_count <int>,
+    ## #   listed_count <int>, statuses_count <int>, favourites_count <int>,
+    ## #   account_created_at <dttm>, verified <lgl>, profile_url <chr>,
+    ## #   profile_expanded_url <chr>, account_lang <chr>,
+    ## #   profile_banner_url <chr>, profile_background_url <chr>,
+    ## #   profile_image_url <chr>
 
 rm\_empty\_cols
 ===============
@@ -253,61 +269,151 @@ rm\_empty\_cols
 edouaRd::rstats
 ```
 
-    ## # A tibble: 13,673 x 36
-    ##    id     time  created_at          from_user_name text       filter_level
-    ##    <chr>  <chr> <dttm>              <chr>          <chr>      <chr>       
-    ##  1 99784… 1526… 2018-05-19 14:21:04 NicholasStray… Redid my … none        
-    ##  2 99784… 1526… 2018-05-19 14:28:34 CMastication   "Are you … none        
-    ##  3 99784… 1526… 2018-05-19 14:30:40 jrosenberg6432 excited t… none        
-    ##  4 99784… 1526… 2018-05-19 14:30:47 lisafederer    Getting r… none        
-    ##  5 99784… 1526… 2018-05-19 14:36:11 RLadiesSantaFe ¡Las insc… none        
-    ##  6 99785… 1526… 2018-05-19 14:45:11 hrbrmstr       "cloc (ht… none        
-    ##  7 99785… 1526… 2018-05-19 14:45:49 hrbrmstr       "RT @CMas… none        
-    ##  8 99785… 1526… 2018-05-19 14:48:10 theredpea      RT @Nicho… none        
-    ##  9 99785… 1526… 2018-05-19 14:49:05 _StarKingdom   New artic… none        
-    ## 10 99785… 1526… 2018-05-19 14:50:36 tejendrapsingh RT @krlml… none        
-    ## # ... with 13,663 more rows, and 30 more variables:
-    ## #   possibly_sensitive <int>, withheld_copyright <chr>,
-    ## #   withheld_scope <chr>, truncated <chr>, retweet_count <int>,
-    ## #   favorite_count <int>, lang <chr>, to_user_name <chr>,
-    ## #   in_reply_to_status_id <chr>, quoted_status_id <chr>, source <chr>,
-    ## #   location <chr>, lat <chr>, lng <chr>, from_user_id <chr>,
-    ## #   from_user_realname <chr>, from_user_verified <int>,
-    ## #   from_user_description <chr>, from_user_url <chr>,
-    ## #   from_user_profile_image_url <chr>, from_user_utcoffset <chr>,
-    ## #   from_user_timezone <chr>, from_user_lang <chr>,
-    ## #   from_user_tweetcount <int>, from_user_followercount <int>,
-    ## #   from_user_friendcount <int>, from_user_favourites_count <int>,
-    ## #   from_user_listed <int>, from_user_withheld_scope <chr>,
-    ## #   from_user_created_at <dttm>
+    ## # A tibble: 2,000 x 88
+    ##    user_id status_id created_at          screen_name text  source
+    ##  * <chr>   <chr>     <dttm>              <chr>       <chr> <chr> 
+    ##  1 286540~ 10173396~ 2018-07-12 09:27:18 ma_salmon   "Gre~ Twitt~
+    ##  2 286540~ 10171095~ 2018-07-11 18:13:08 ma_salmon   "The~ Twitt~
+    ##  3 286540~ 10172707~ 2018-07-12 04:53:46 ma_salmon   "aaa~ Twitt~
+    ##  4 286540~ 10172641~ 2018-07-12 04:27:29 ma_salmon   This~ Twitt~
+    ##  5 286540~ 10170444~ 2018-07-11 13:54:20 ma_salmon   Slid~ Twitt~
+    ##  6 286540~ 10173187~ 2018-07-12 08:04:16 ma_salmon   "Glu~ Twitt~
+    ##  7 286540~ 10172670~ 2018-07-12 04:39:02 ma_salmon   "sup~ Twitt~
+    ##  8 286540~ 10170937~ 2018-07-11 17:10:26 ma_salmon   "And~ Twitt~
+    ##  9 294604~ 10173388~ 2018-07-12 09:24:07 EuropePMC_~ "Gre~ Tweet~
+    ## 10 170203~ 10173387~ 2018-07-12 09:24:03 WoodChival~ "Gre~ Twitt~
+    ## # ... with 1,990 more rows, and 82 more variables:
+    ## #   display_text_width <dbl>, reply_to_status_id <chr>,
+    ## #   reply_to_user_id <chr>, reply_to_screen_name <chr>, is_quote <lgl>,
+    ## #   is_retweet <lgl>, favorite_count <int>, retweet_count <int>,
+    ## #   hashtags <list>, symbols <list>, urls_url <list>, urls_t.co <list>,
+    ## #   urls_expanded_url <list>, media_url <list>, media_t.co <list>,
+    ## #   media_expanded_url <list>, media_type <list>, ext_media_url <list>,
+    ## #   ext_media_t.co <list>, ext_media_expanded_url <list>,
+    ## #   ext_media_type <chr>, mentions_user_id <list>,
+    ## #   mentions_screen_name <list>, lang <chr>, quoted_status_id <chr>,
+    ## #   quoted_text <chr>, quoted_created_at <dttm>, quoted_source <chr>,
+    ## #   quoted_favorite_count <int>, quoted_retweet_count <int>,
+    ## #   quoted_user_id <chr>, quoted_screen_name <chr>, quoted_name <chr>,
+    ## #   quoted_followers_count <int>, quoted_friends_count <int>,
+    ## #   quoted_statuses_count <int>, quoted_location <chr>,
+    ## #   quoted_description <chr>, quoted_verified <lgl>,
+    ## #   retweet_status_id <chr>, retweet_text <chr>,
+    ## #   retweet_created_at <dttm>, retweet_source <chr>,
+    ## #   retweet_favorite_count <int>, retweet_retweet_count <int>,
+    ## #   retweet_user_id <chr>, retweet_screen_name <chr>, retweet_name <chr>,
+    ## #   retweet_followers_count <int>, retweet_friends_count <int>,
+    ## #   retweet_statuses_count <int>, retweet_location <chr>,
+    ## #   retweet_description <chr>, retweet_verified <lgl>, place_url <chr>,
+    ## #   place_name <chr>, place_full_name <chr>, place_type <chr>,
+    ## #   country <chr>, country_code <chr>, geo_coords <list>,
+    ## #   coords_coords <list>, bbox_coords <list>, status_url <chr>,
+    ## #   name <chr>, location <chr>, description <chr>, url <chr>,
+    ## #   protected <lgl>, followers_count <int>, friends_count <int>,
+    ## #   listed_count <int>, statuses_count <int>, favourites_count <int>,
+    ## #   account_created_at <dttm>, verified <lgl>, profile_url <chr>,
+    ## #   profile_expanded_url <chr>, account_lang <chr>,
+    ## #   profile_banner_url <chr>, profile_background_url <chr>,
+    ## #   profile_image_url <chr>
 
 ``` r
 rm_empty_cols(edouaRd::rstats)
 ```
 
-    ## # A tibble: 13,673 x 28
-    ##    id     time  created_at          from_user_name text       filter_level
-    ##    <chr>  <chr> <dttm>              <chr>          <chr>      <chr>       
-    ##  1 99784… 1526… 2018-05-19 14:21:04 NicholasStray… Redid my … none        
-    ##  2 99784… 1526… 2018-05-19 14:28:34 CMastication   "Are you … none        
-    ##  3 99784… 1526… 2018-05-19 14:30:40 jrosenberg6432 excited t… none        
-    ##  4 99784… 1526… 2018-05-19 14:30:47 lisafederer    Getting r… none        
-    ##  5 99784… 1526… 2018-05-19 14:36:11 RLadiesSantaFe ¡Las insc… none        
-    ##  6 99785… 1526… 2018-05-19 14:45:11 hrbrmstr       "cloc (ht… none        
-    ##  7 99785… 1526… 2018-05-19 14:45:49 hrbrmstr       "RT @CMas… none        
-    ##  8 99785… 1526… 2018-05-19 14:48:10 theredpea      RT @Nicho… none        
-    ##  9 99785… 1526… 2018-05-19 14:49:05 _StarKingdom   New artic… none        
-    ## 10 99785… 1526… 2018-05-19 14:50:36 tejendrapsingh RT @krlml… none        
-    ## # ... with 13,663 more rows, and 22 more variables:
-    ## #   possibly_sensitive <int>, retweet_count <int>, favorite_count <int>,
-    ## #   lang <chr>, to_user_name <chr>, in_reply_to_status_id <chr>,
-    ## #   quoted_status_id <chr>, source <chr>, location <chr>,
-    ## #   from_user_id <chr>, from_user_realname <chr>,
-    ## #   from_user_verified <int>, from_user_description <chr>,
-    ## #   from_user_url <chr>, from_user_profile_image_url <chr>,
-    ## #   from_user_lang <chr>, from_user_tweetcount <int>,
-    ## #   from_user_followercount <int>, from_user_friendcount <int>,
-    ## #   from_user_favourites_count <int>, from_user_listed <int>,
-    ## #   from_user_created_at <dttm>
+    ## # A tibble: 2,000 x 86
+    ##    user_id status_id created_at          screen_name text  source
+    ##    <chr>   <chr>     <dttm>              <chr>       <chr> <chr> 
+    ##  1 286540~ 10173396~ 2018-07-12 09:27:18 ma_salmon   "Gre~ Twitt~
+    ##  2 286540~ 10171095~ 2018-07-11 18:13:08 ma_salmon   "The~ Twitt~
+    ##  3 286540~ 10172707~ 2018-07-12 04:53:46 ma_salmon   "aaa~ Twitt~
+    ##  4 286540~ 10172641~ 2018-07-12 04:27:29 ma_salmon   This~ Twitt~
+    ##  5 286540~ 10170444~ 2018-07-11 13:54:20 ma_salmon   Slid~ Twitt~
+    ##  6 286540~ 10173187~ 2018-07-12 08:04:16 ma_salmon   "Glu~ Twitt~
+    ##  7 286540~ 10172670~ 2018-07-12 04:39:02 ma_salmon   "sup~ Twitt~
+    ##  8 286540~ 10170937~ 2018-07-11 17:10:26 ma_salmon   "And~ Twitt~
+    ##  9 294604~ 10173388~ 2018-07-12 09:24:07 EuropePMC_~ "Gre~ Tweet~
+    ## 10 170203~ 10173387~ 2018-07-12 09:24:03 WoodChival~ "Gre~ Twitt~
+    ## # ... with 1,990 more rows, and 80 more variables:
+    ## #   display_text_width <dbl>, reply_to_status_id <chr>,
+    ## #   reply_to_user_id <chr>, reply_to_screen_name <chr>, is_quote <lgl>,
+    ## #   is_retweet <lgl>, favorite_count <int>, retweet_count <int>,
+    ## #   hashtags <list>, urls_url <list>, urls_t.co <list>,
+    ## #   urls_expanded_url <list>, media_url <list>, media_t.co <list>,
+    ## #   media_expanded_url <list>, media_type <list>, ext_media_url <list>,
+    ## #   ext_media_t.co <list>, ext_media_expanded_url <list>,
+    ## #   mentions_user_id <list>, mentions_screen_name <list>, lang <chr>,
+    ## #   quoted_status_id <chr>, quoted_text <chr>, quoted_created_at <dttm>,
+    ## #   quoted_source <chr>, quoted_favorite_count <int>,
+    ## #   quoted_retweet_count <int>, quoted_user_id <chr>,
+    ## #   quoted_screen_name <chr>, quoted_name <chr>,
+    ## #   quoted_followers_count <int>, quoted_friends_count <int>,
+    ## #   quoted_statuses_count <int>, quoted_location <chr>,
+    ## #   quoted_description <chr>, quoted_verified <lgl>,
+    ## #   retweet_status_id <chr>, retweet_text <chr>,
+    ## #   retweet_created_at <dttm>, retweet_source <chr>,
+    ## #   retweet_favorite_count <int>, retweet_retweet_count <int>,
+    ## #   retweet_user_id <chr>, retweet_screen_name <chr>, retweet_name <chr>,
+    ## #   retweet_followers_count <int>, retweet_friends_count <int>,
+    ## #   retweet_statuses_count <int>, retweet_location <chr>,
+    ## #   retweet_description <chr>, retweet_verified <lgl>, place_url <chr>,
+    ## #   place_name <chr>, place_full_name <chr>, place_type <chr>,
+    ## #   country <chr>, country_code <chr>, geo_coords <list>,
+    ## #   coords_coords <list>, bbox_coords <list>, status_url <chr>,
+    ## #   name <chr>, location <chr>, description <chr>, url <chr>,
+    ## #   protected <lgl>, followers_count <int>, friends_count <int>,
+    ## #   listed_count <int>, statuses_count <int>, favourites_count <int>,
+    ## #   account_created_at <dttm>, verified <lgl>, profile_url <chr>,
+    ## #   profile_expanded_url <chr>, account_lang <chr>,
+    ## #   profile_banner_url <chr>, profile_background_url <chr>,
+    ## #   profile_image_url <chr>
+
+sampler
+=======
+
+`sampler` permet de prélever un échantillon aléatoire dans un dataframe.
+
+``` r
+sampler(edouaRd::rstats, 3)
+```
+
+    ## # A tibble: 3 x 88
+    ##   user_id status_id created_at          screen_name text  source
+    ##   <chr>   <chr>     <dttm>              <chr>       <chr> <chr> 
+    ## 1 101181~ 10170250~ 2018-07-11 12:37:12 rstatstweet Post~ rstat~
+    ## 2 264478~ 10172075~ 2018-07-12 00:42:32 marekrog    "Inf~ Twitt~
+    ## 3 360240~ 10170716~ 2018-07-11 15:42:38 AliciaFors~ Like~ Twitt~
+    ## # ... with 82 more variables: display_text_width <dbl>,
+    ## #   reply_to_status_id <chr>, reply_to_user_id <chr>,
+    ## #   reply_to_screen_name <chr>, is_quote <lgl>, is_retweet <lgl>,
+    ## #   favorite_count <int>, retweet_count <int>, hashtags <list>,
+    ## #   symbols <list>, urls_url <list>, urls_t.co <list>,
+    ## #   urls_expanded_url <list>, media_url <list>, media_t.co <list>,
+    ## #   media_expanded_url <list>, media_type <list>, ext_media_url <list>,
+    ## #   ext_media_t.co <list>, ext_media_expanded_url <list>,
+    ## #   ext_media_type <chr>, mentions_user_id <list>,
+    ## #   mentions_screen_name <list>, lang <chr>, quoted_status_id <chr>,
+    ## #   quoted_text <chr>, quoted_created_at <dttm>, quoted_source <chr>,
+    ## #   quoted_favorite_count <int>, quoted_retweet_count <int>,
+    ## #   quoted_user_id <chr>, quoted_screen_name <chr>, quoted_name <chr>,
+    ## #   quoted_followers_count <int>, quoted_friends_count <int>,
+    ## #   quoted_statuses_count <int>, quoted_location <chr>,
+    ## #   quoted_description <chr>, quoted_verified <lgl>,
+    ## #   retweet_status_id <chr>, retweet_text <chr>,
+    ## #   retweet_created_at <dttm>, retweet_source <chr>,
+    ## #   retweet_favorite_count <int>, retweet_retweet_count <int>,
+    ## #   retweet_user_id <chr>, retweet_screen_name <chr>, retweet_name <chr>,
+    ## #   retweet_followers_count <int>, retweet_friends_count <int>,
+    ## #   retweet_statuses_count <int>, retweet_location <chr>,
+    ## #   retweet_description <chr>, retweet_verified <lgl>, place_url <chr>,
+    ## #   place_name <chr>, place_full_name <chr>, place_type <chr>,
+    ## #   country <chr>, country_code <chr>, geo_coords <list>,
+    ## #   coords_coords <list>, bbox_coords <list>, status_url <chr>,
+    ## #   name <chr>, location <chr>, description <chr>, url <chr>,
+    ## #   protected <lgl>, followers_count <int>, friends_count <int>,
+    ## #   listed_count <int>, statuses_count <int>, favourites_count <int>,
+    ## #   account_created_at <dttm>, verified <lgl>, profile_url <chr>,
+    ## #   profile_expanded_url <chr>, account_lang <chr>,
+    ## #   profile_banner_url <chr>, profile_background_url <chr>,
+    ## #   profile_image_url <chr>
 
 Pour toute question ou suggestion, merci de consulter la section [issues tracker](https://github.com/edouardschuppert/edouaRd/issues).

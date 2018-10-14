@@ -1,7 +1,7 @@
 Package: edouaRd
 Type: Package
 Title: edouaRd
-Version: 0.1.4
+Version: 1.0.0
 Imports:
     dplyr,
     ggplot2,
@@ -23,4 +23,4 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/edouardschuppert/edouaRd
 BugReports: https://github.com/edouardschuppert/edouaRd/issues
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
