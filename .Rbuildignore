@@ -2,3 +2,8 @@
 ^\.Rproj\.user$
 data/rstats.rda
 wf_dictionary.rda
+README.Rmd
+README_fr.Rmd
+README_files
+README_fr.md
+README_fr_files
