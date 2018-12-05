@@ -20,7 +20,7 @@ flatlist <- function(df) {
     if (class(x$temp_name) == "list") {
 
       x <- x %>%
-        dplyr::mutate(temp_name = as.character(temp_name))
+        dplyr::mutate(temp_name = as.character(.data$temp_name))
 
     }
 

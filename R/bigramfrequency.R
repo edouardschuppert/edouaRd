@@ -17,13 +17,13 @@ bigramfrequency <- function(df, colonne, slice = NA) {
   df <- df %>%
     dplyr::select(!!colonne) %>%
     dplyr::mutate(colonne = povertext(!!colonne)) %>%
-    tidytext::unnest_tokens(bigram, colonne, token = "ngrams", n = 2, to_lower = TRUE) %>%
+    tidytext::unnest_tokens(.data$bigram, colonne, token = "ngrams", n = 2, to_lower = TRUE) %>%
     dplyr::select(- !!colonne) %>%
-    tidyr::separate(bigram, c("bigram1", "bigram2"), sep = " ") %>%
+    tidyr::separate(.data$bigram, c("bigram1", "bigram2"), sep = " ") %>%
     dplyr::anti_join(wf_dictionary, by = c("bigram1" = "words")) %>%
     dplyr::anti_join(wf_dictionary, by = c("bigram2" = "words")) %>%
-    tidyr::unite(bigram, bigram1, bigram2, sep = " ") %>%
-    dplyr::count(bigram) %>%
+    tidyr::unite(.data$bigram, .data$bigram1, .data$bigram2, sep = " ") %>%
+    dplyr::count(.data$bigram) %>%
     dplyr::arrange(desc(n))
 
   # Keep only the desired length

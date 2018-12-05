@@ -17,11 +17,11 @@ wordfrequency <- function(df, colonne, slice = NA) {
   df <- df %>%
     dplyr::select(!!colonne) %>%
     dplyr::mutate(colonne = povertext(!!colonne)) %>%
-    tidytext::unnest_tokens(words, colonne) %>%
+    tidytext::unnest_tokens(.data$words, colonne) %>%
     dplyr::select(- !!colonne) %>%
-    dplyr::filter(is.na(words) == FALSE) %>%
+    dplyr::filter(is.na(.data$words) == FALSE) %>%
     dplyr::anti_join(wf_dictionary, by = "words") %>%
-    dplyr::count(words) %>%
+    dplyr::count(.data$words) %>%
     dplyr::arrange(desc(n))
 
   # Keep only the desired length

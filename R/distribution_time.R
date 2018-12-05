@@ -23,16 +23,16 @@ distribution_time <- function(df, colonne, granularity = "day", draw = FALSE) {
       dplyr::mutate(Jour = lubridate::day(!!colonne)) %>%
       dplyr::mutate(Mois = lubridate::month(!!colonne)) %>%
       dplyr::mutate(Annee = lubridate::year(!!colonne)) %>%
-      dplyr::group_by(Annee, Mois, Jour, Heure, Minute, Seconde) %>%
+      dplyr::group_by(.data$Annee, .data$Mois, .data$Jour, .data$Heure, .data$Minute, .data$Seconde) %>%
       dplyr::summarise(n = dplyr::n()) %>%
-      dplyr::mutate(Date = lubridate::ymd_hms(paste(Annee, "-", Mois, "-", Jour, " ", Heure, ":", Minute, ":", Seconde)))
+      dplyr::mutate(Date = lubridate::ymd_hms(paste(.data$Annee, "-", .data$Mois, "-", .data$Jour, " ", .data$Heure, ":", .data$Minute, ":", .data$Seconde)))
 
     df <- dplyr::data_frame(created_at = df$Date, n = df$n)
 
     if (draw == TRUE) {
 
       df <- df %>%
-        ggplot2::ggplot(ggplot2::aes(created_at, n)) +
+        ggplot2::ggplot(ggplot2::aes(.data$created_at, n)) +
         ggplot2::geom_line()
 
     }
@@ -50,16 +50,16 @@ distribution_time <- function(df, colonne, granularity = "day", draw = FALSE) {
       dplyr::mutate(Jour = lubridate::day(!!colonne)) %>%
       dplyr::mutate(Mois = lubridate::month(!!colonne)) %>%
       dplyr::mutate(Annee = lubridate::year(!!colonne)) %>%
-      dplyr::group_by(Annee, Mois, Jour, Heure, Minute) %>%
+      dplyr::group_by(.data$Annee, .data$Mois, .data$Jour, .data$Heure, .data$Minute) %>%
       dplyr::summarise(n = dplyr::n()) %>%
-      dplyr::mutate(Date = lubridate::ymd_hms(paste(Annee, "-", Mois, "-", Jour, " ", Heure, ":", Minute, ":00")))
+      dplyr::mutate(Date = lubridate::ymd_hms(paste(.data$Annee, "-", .data$Mois, "-", .data$Jour, " ", .data$Heure, ":", .data$Minute, ":00")))
 
     df <- dplyr::data_frame(created_at = df$Date, n = df$n)
 
     if (draw == TRUE) {
 
       df <- df %>%
-        ggplot2::ggplot(ggplot2::aes(created_at, n)) +
+        ggplot2::ggplot(ggplot2::aes(.data$created_at, n)) +
         ggplot2::geom_line()
 
     }
@@ -76,16 +76,16 @@ distribution_time <- function(df, colonne, granularity = "day", draw = FALSE) {
       dplyr::mutate(Jour = lubridate::day(!!colonne)) %>%
       dplyr::mutate(Mois = lubridate::month(!!colonne)) %>%
       dplyr::mutate(Annee = lubridate::year(!!colonne)) %>%
-      dplyr::group_by(Annee, Mois, Jour, Heure) %>%
+      dplyr::group_by(.data$Annee, .data$Mois, .data$Jour, .data$Heure) %>%
       dplyr::summarise(n = dplyr::n()) %>%
-      dplyr::mutate(Date = lubridate::ymd_hms(paste(Annee, "-", Mois, "-", Jour, " ", Heure, ":00:00")))
+      dplyr::mutate(Date = lubridate::ymd_hms(paste(.data$Annee, "-", .data$Mois, "-", .data$Jour, " ", .data$Heure, ":00:00")))
 
     df <- dplyr::data_frame(created_at = df$Date, n = df$n)
 
     if (draw == TRUE) {
 
       df <- df %>%
-        ggplot2::ggplot(ggplot2::aes(created_at, n)) +
+        ggplot2::ggplot(ggplot2::aes(.data$created_at, n)) +
         ggplot2::geom_line()
 
     }
@@ -101,16 +101,16 @@ distribution_time <- function(df, colonne, granularity = "day", draw = FALSE) {
     dplyr::mutate(Jour = lubridate::day(!!colonne)) %>%
     dplyr::mutate(Mois = lubridate::month(!!colonne)) %>%
     dplyr::mutate(Annee = lubridate::year(!!colonne)) %>%
-    dplyr::group_by(Annee, Mois, Jour) %>%
+    dplyr::group_by(.data$Annee, .data$Mois, .data$Jour) %>%
     dplyr::summarise(n = dplyr::n()) %>%
-    dplyr::mutate(Date = lubridate::ymd(paste(Annee, "-", Mois, "-", Jour)))
+    dplyr::mutate(Date = lubridate::ymd(paste(.data$Annee, "-", .data$Mois, "-", .data$Jour)))
 
     df <- dplyr::data_frame(created_at = df$Date, n = df$n)
 
     if (draw == TRUE) {
 
       df <- df %>%
-        ggplot2::ggplot(ggplot2::aes(created_at, n)) +
+        ggplot2::ggplot(ggplot2::aes(.data$created_at, n)) +
         ggplot2::geom_line()
 
     }
@@ -125,16 +125,16 @@ distribution_time <- function(df, colonne, granularity = "day", draw = FALSE) {
     df <- df %>%
       dplyr::mutate(Mois = lubridate::month(!!colonne)) %>%
       dplyr::mutate(Annee = lubridate::year(!!colonne)) %>%
-      dplyr::group_by(Annee, Mois) %>%
+      dplyr::group_by(.data$Annee, .data$Mois) %>%
       dplyr::summarise(n = dplyr::n()) %>%
-      dplyr::mutate(Date = lubridate::ymd(paste(Annee, "-", Mois, "-01")))
+      dplyr::mutate(Date = lubridate::ymd(paste(.data$Annee, "-", .data$Mois, "-01")))
 
     if (draw == TRUE) {
 
       df <- dplyr::data_frame(created_at = df$Date, n = df$n)
 
       df <- df %>%
-        ggplot2::ggplot(ggplot2::aes(created_at, n)) +
+        ggplot2::ggplot(ggplot2::aes(.data$created_at, n)) +
         ggplot2::geom_line()
 
     }
@@ -142,7 +142,7 @@ distribution_time <- function(df, colonne, granularity = "day", draw = FALSE) {
     if (draw == FALSE) {
 
     df <- dplyr::data_frame(created_at = df$Date, n = df$n) %>%
-      dplyr::mutate(created_at = stringr::str_remove(created_at, rex::rex("-01", end)))
+      dplyr::mutate(created_at = stringr::str_remove(.data$created_at, "-01$"))
 
     }
 
@@ -155,16 +155,16 @@ distribution_time <- function(df, colonne, granularity = "day", draw = FALSE) {
 
     df <- df %>%
       dplyr::mutate(Annee = lubridate::year(!!colonne)) %>%
-      dplyr::group_by(Annee) %>%
+      dplyr::group_by(.data$Annee) %>%
       dplyr::summarise(n = dplyr::n()) %>%
-      dplyr::mutate(Date = lubridate::ymd(paste(Annee, "-01-01")))
+      dplyr::mutate(Date = lubridate::ymd(paste(.data$Annee, "-01-01")))
 
     if (draw == TRUE) {
 
       df <- dplyr::data_frame(created_at = df$Date, n = df$n)
 
       df <- df %>%
-        ggplot2::ggplot(ggplot2::aes(created_at, n)) +
+        ggplot2::ggplot(ggplot2::aes(.data$created_at, n)) +
         ggplot2::geom_line()
 
     }
@@ -172,7 +172,7 @@ distribution_time <- function(df, colonne, granularity = "day", draw = FALSE) {
     if (draw == FALSE) {
 
       df <- dplyr::data_frame(created_at = df$Date, n = df$n) %>%
-        dplyr::mutate(created_at = stringr::str_remove(created_at, rex::rex("-01-01", end)))
+        dplyr::mutate(created_at = stringr::str_remove(.data$created_at, "-01-01$"))
 
     }
 
