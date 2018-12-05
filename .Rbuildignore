@@ -1,7 +1,6 @@
+^data-raw$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-data/rstats.rda
-wf_dictionary.rda
 README.Rmd
 README_fr.Rmd
 README_files
