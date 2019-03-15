@@ -10,35 +10,20 @@ flatlist <- function(df) {
 
   while (i != 0) {
 
-    x <- df %>%
-      dplyr::select(i)
+    x <- df %>% select(i)
 
     stock <- names(x)
 
     names(x) <- "temp_name"
 
-    if (class(x$temp_name) == "list") {
+    classe <- as.character(class(x$temp_name))
 
-      x <- x %>%
-        dplyr::mutate(temp_name = as.character(.data$temp_name))
-
-    }
+    if (any(classe == "list")) x <- x %>% mutate(temp_name = as.character(.data$temp_name))
 
     names(x) <- stock
 
-    if (exists("newtab") == TRUE) {
-
-      newtab <- cbind(x, newtab)
-
-    }
-
-    if (exists("newtab") == FALSE) {
-
-      newtab <- x
-
-    }
-
-    rm(x, stock)
+    if (exists("newtab") == TRUE) newtab <- cbind(x, newtab)
+    if (exists("newtab") == FALSE) newtab <- x
 
     i <- i - 1
   }
