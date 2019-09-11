@@ -22,8 +22,8 @@ choose_period <- function(df, colonne, startday, endday, starttime = "00:00:00",
 
   # Sort the range
   df <- df %>%
-    dplyr::filter(!!colonne > starttimestamp &
-           !!colonne < endtimestamp)
+    dplyr::filter(!!colonne >= starttimestamp &
+           !!colonne <= endtimestamp)
 
   # Arrange the range
   if (sort == TRUE) {
