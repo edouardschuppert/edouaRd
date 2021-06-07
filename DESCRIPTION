@@ -1,7 +1,7 @@
 Package: edouaRd
 Type: Package
 Title: edouaRd
-Version: 1.1.1
+Version: 1.2.0
 Imports:
     dplyr,
     ggplot2,
@@ -12,15 +12,16 @@ Imports:
     rex,
     rlang,
     stringr,
+    tibble,
     tidyr,
     tidytext
 Authors@R: person("Edouard", "Schuppert", email = "edouard.schuppert@gmail.com",
   role = c("aut", "cre"))
 Description: The package is a set of functions that I use every day.
-Depends: R (>= 3.4.0)
+Depends: R (>= 4.0.0)
 License: CC0
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/edouardschuppert/edouaRd
 BugReports: https://github.com/edouardschuppert/edouaRd/issues
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1

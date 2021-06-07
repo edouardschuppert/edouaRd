@@ -1,6 +1,8 @@
 #' flatlist
 #'
 #' @param df Your data frame
+#' @importFrom dplyr select
+#' @importFrom dplyr mutate
 #' @return allows you to manage the columns of an array in list format, transforming them into character columns.
 #' @export
 

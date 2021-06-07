@@ -6,34 +6,43 @@
 #' @param colonne Your column
 #' @param granularity Change the granularity of the work, possible: "year", "month", "day", "hour", "minute","second". Default set to "day"
 #' @param draw Ability to return a ggplot2 schema to view the distribution. Default set to FALSE
+#' @importFrom rlang enquo
+#' @importFrom dplyr mutate
+#' @importFrom dplyr group_by
+#' @importFrom dplyr summarise
+#' @importFrom tibble tibble
+#' @importFrom dplyr n
+#' @import lubridate
+#' @import ggplot2
+#' @importFrom stringr str_remove
 #' @return Returns a distribution table
 #' @export
 
 distribution_time <- function(df, colonne, granularity = "day", draw = FALSE) {
 
-  colonne <- rlang::enquo(colonne)
+  colonne <- enquo(colonne)
 
   # Per second
   if (granularity == "second") {
 
     df <- df %>%
-      dplyr::mutate(Seconde = lubridate::second(!!colonne)) %>%
-      dplyr::mutate(Minute = lubridate::minute(!!colonne)) %>%
-      dplyr::mutate(Heure = lubridate::hour(!!colonne)) %>%
-      dplyr::mutate(Jour = lubridate::day(!!colonne)) %>%
-      dplyr::mutate(Mois = lubridate::month(!!colonne)) %>%
-      dplyr::mutate(Annee = lubridate::year(!!colonne)) %>%
-      dplyr::group_by(.data$Annee, .data$Mois, .data$Jour, .data$Heure, .data$Minute, .data$Seconde) %>%
-      dplyr::summarise(n = dplyr::n()) %>%
-      dplyr::mutate(Date = lubridate::ymd_hms(paste(.data$Annee, "-", .data$Mois, "-", .data$Jour, " ", .data$Heure, ":", .data$Minute, ":", .data$Seconde)))
+      mutate(Seconde = second(!!colonne)) %>%
+      mutate(Minute = minute(!!colonne)) %>%
+      mutate(Heure = hour(!!colonne)) %>%
+      mutate(Jour = day(!!colonne)) %>%
+      mutate(Mois = month(!!colonne)) %>%
+      mutate(Annee = year(!!colonne)) %>%
+      group_by(.data$Annee, .data$Mois, .data$Jour, .data$Heure, .data$Minute, .data$Seconde) %>%
+      summarise(n = n()) %>%
+      mutate(Date = ymd_hms(paste(.data$Annee, "-", .data$Mois, "-", .data$Jour, " ", .data$Heure, ":", .data$Minute, ":", .data$Seconde)))
 
-    df <- dplyr::data_frame(created_at = df$Date, n = df$n)
+    df <- tibble(created_at = df$Date, n = df$n)
 
     if (draw == TRUE) {
 
       df <- df %>%
-        ggplot2::ggplot(ggplot2::aes(.data$created_at, n)) +
-        ggplot2::geom_line()
+        ggplot(aes(.data$created_at, n)) +
+        geom_line()
 
     }
 
@@ -45,22 +54,22 @@ distribution_time <- function(df, colonne, granularity = "day", draw = FALSE) {
   if (granularity == "minute") {
 
     df <- df %>%
-      dplyr::mutate(Minute = lubridate::minute(!!colonne)) %>%
-      dplyr::mutate(Heure = lubridate::hour(!!colonne)) %>%
-      dplyr::mutate(Jour = lubridate::day(!!colonne)) %>%
-      dplyr::mutate(Mois = lubridate::month(!!colonne)) %>%
-      dplyr::mutate(Annee = lubridate::year(!!colonne)) %>%
-      dplyr::group_by(.data$Annee, .data$Mois, .data$Jour, .data$Heure, .data$Minute) %>%
-      dplyr::summarise(n = dplyr::n()) %>%
-      dplyr::mutate(Date = lubridate::ymd_hms(paste(.data$Annee, "-", .data$Mois, "-", .data$Jour, " ", .data$Heure, ":", .data$Minute, ":00")))
+      mutate(Minute = minute(!!colonne)) %>%
+      mutate(Heure = hour(!!colonne)) %>%
+      mutate(Jour = day(!!colonne)) %>%
+      mutate(Mois = month(!!colonne)) %>%
+      mutate(Annee = year(!!colonne)) %>%
+      group_by(.data$Annee, .data$Mois, .data$Jour, .data$Heure, .data$Minute) %>%
+      summarise(n = n()) %>%
+      mutate(Date = ymd_hms(paste(.data$Annee, "-", .data$Mois, "-", .data$Jour, " ", .data$Heure, ":", .data$Minute, ":00")))
 
-    df <- dplyr::data_frame(created_at = df$Date, n = df$n)
+    df <- tibble(created_at = df$Date, n = df$n)
 
     if (draw == TRUE) {
 
       df <- df %>%
-        ggplot2::ggplot(ggplot2::aes(.data$created_at, n)) +
-        ggplot2::geom_line()
+        ggplot(aes(.data$created_at, n)) +
+        geom_line()
 
     }
 
@@ -72,21 +81,21 @@ distribution_time <- function(df, colonne, granularity = "day", draw = FALSE) {
   if (granularity == "hour") {
 
     df <- df %>%
-      dplyr::mutate(Heure = lubridate::hour(!!colonne)) %>%
-      dplyr::mutate(Jour = lubridate::day(!!colonne)) %>%
-      dplyr::mutate(Mois = lubridate::month(!!colonne)) %>%
-      dplyr::mutate(Annee = lubridate::year(!!colonne)) %>%
-      dplyr::group_by(.data$Annee, .data$Mois, .data$Jour, .data$Heure) %>%
-      dplyr::summarise(n = dplyr::n()) %>%
-      dplyr::mutate(Date = lubridate::ymd_hms(paste(.data$Annee, "-", .data$Mois, "-", .data$Jour, " ", .data$Heure, ":00:00")))
+      mutate(Heure = hour(!!colonne)) %>%
+      mutate(Jour = day(!!colonne)) %>%
+      mutate(Mois = month(!!colonne)) %>%
+      mutate(Annee = year(!!colonne)) %>%
+      group_by(.data$Annee, .data$Mois, .data$Jour, .data$Heure) %>%
+      summarise(n = n()) %>%
+      mutate(Date = ymd_hms(paste(.data$Annee, "-", .data$Mois, "-", .data$Jour, " ", .data$Heure, ":00:00")))
 
-    df <- dplyr::data_frame(created_at = df$Date, n = df$n)
+    df <- tibble(created_at = df$Date, n = df$n)
 
     if (draw == TRUE) {
 
       df <- df %>%
-        ggplot2::ggplot(ggplot2::aes(.data$created_at, n)) +
-        ggplot2::geom_line()
+        ggplot(aes(.data$created_at, n)) +
+        geom_line()
 
     }
 
@@ -98,20 +107,20 @@ distribution_time <- function(df, colonne, granularity = "day", draw = FALSE) {
   if (granularity == "day") {
 
     df <- df %>%
-    dplyr::mutate(Jour = lubridate::day(!!colonne)) %>%
-    dplyr::mutate(Mois = lubridate::month(!!colonne)) %>%
-    dplyr::mutate(Annee = lubridate::year(!!colonne)) %>%
-    dplyr::group_by(.data$Annee, .data$Mois, .data$Jour) %>%
-    dplyr::summarise(n = dplyr::n()) %>%
-    dplyr::mutate(Date = lubridate::ymd(paste(.data$Annee, "-", .data$Mois, "-", .data$Jour)))
+      mutate(Jour = day(!!colonne)) %>%
+      mutate(Mois = month(!!colonne)) %>%
+      mutate(Annee = year(!!colonne)) %>%
+      group_by(.data$Annee, .data$Mois, .data$Jour) %>%
+      summarise(n = n()) %>%
+      mutate(Date = ymd(paste(.data$Annee, "-", .data$Mois, "-", .data$Jour)))
 
-    df <- dplyr::data_frame(created_at = df$Date, n = df$n)
+    df <- tibble(created_at = df$Date, n = df$n)
 
     if (draw == TRUE) {
 
       df <- df %>%
-        ggplot2::ggplot(ggplot2::aes(.data$created_at, n)) +
-        ggplot2::geom_line()
+        ggplot(aes(.data$created_at, n)) +
+        geom_line()
 
     }
 
@@ -123,26 +132,26 @@ distribution_time <- function(df, colonne, granularity = "day", draw = FALSE) {
   if (granularity == "month") {
 
     df <- df %>%
-      dplyr::mutate(Mois = lubridate::month(!!colonne)) %>%
-      dplyr::mutate(Annee = lubridate::year(!!colonne)) %>%
-      dplyr::group_by(.data$Annee, .data$Mois) %>%
-      dplyr::summarise(n = dplyr::n()) %>%
-      dplyr::mutate(Date = lubridate::ymd(paste(.data$Annee, "-", .data$Mois, "-01")))
+      mutate(Mois = month(!!colonne)) %>%
+      mutate(Annee = year(!!colonne)) %>%
+      group_by(.data$Annee, .data$Mois) %>%
+      summarise(n = n()) %>%
+      mutate(Date = ymd(paste(.data$Annee, "-", .data$Mois, "-01")))
 
     if (draw == TRUE) {
 
-      df <- dplyr::data_frame(created_at = df$Date, n = df$n)
+      df <- tibble(created_at = df$Date, n = df$n)
 
       df <- df %>%
-        ggplot2::ggplot(ggplot2::aes(.data$created_at, n)) +
-        ggplot2::geom_line()
+        ggplot(aes(.data$created_at, n)) +
+        geom_line()
 
     }
 
     if (draw == FALSE) {
 
-    df <- dplyr::data_frame(created_at = df$Date, n = df$n) %>%
-      dplyr::mutate(created_at = stringr::str_remove(.data$created_at, "-01$"))
+      df <- tibble(created_at = df$Date, n = df$n) %>%
+        mutate(created_at = str_remove(.data$created_at, "-01$"))
 
     }
 
@@ -154,25 +163,25 @@ distribution_time <- function(df, colonne, granularity = "day", draw = FALSE) {
   if (granularity == "year") {
 
     df <- df %>%
-      dplyr::mutate(Annee = lubridate::year(!!colonne)) %>%
-      dplyr::group_by(.data$Annee) %>%
-      dplyr::summarise(n = dplyr::n()) %>%
-      dplyr::mutate(Date = lubridate::ymd(paste(.data$Annee, "-01-01")))
+      mutate(Annee = year(!!colonne)) %>%
+      group_by(.data$Annee) %>%
+      summarise(n = n()) %>%
+      mutate(Date = ymd(paste(.data$Annee, "-01-01")))
 
     if (draw == TRUE) {
 
-      df <- dplyr::data_frame(created_at = df$Date, n = df$n)
+      df <- tibble(created_at = df$Date, n = df$n)
 
       df <- df %>%
-        ggplot2::ggplot(ggplot2::aes(.data$created_at, n)) +
-        ggplot2::geom_line()
+        ggplot(aes(.data$created_at, n)) +
+        geom_line()
 
     }
 
     if (draw == FALSE) {
 
-      df <- dplyr::data_frame(created_at = df$Date, n = df$n) %>%
-        dplyr::mutate(created_at = stringr::str_remove(.data$created_at, "-01-01$"))
+      df <- tibble(created_at = df$Date, n = df$n) %>%
+        mutate(created_at = str_remove(.data$created_at, "-01-01$"))
 
     }
 

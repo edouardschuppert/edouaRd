@@ -4,11 +4,13 @@
 \name{wf_dictionary}
 \alias{wf_dictionary}
 \title{wf_dictionary}
-\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 998 rows and 2 columns.}
+\format{
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 998 rows and 2 columns.
+}
 \usage{
 data(wf_dictionary)
 }
 \description{
-Descripion
+Description
 }
 \keyword{datasets}

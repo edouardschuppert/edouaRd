@@ -1,6 +1,6 @@
 #' wf_dictionary
 #'
-#' Descripion
+#' Description
 #'
 #' @docType data
 #'
